@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,12 +20,55 @@ namespace Finals_Project
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            DialogResult dt = MessageBox.Show("Do you want to Exit!?", "Exit System Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if(dt == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
             this.ActiveControl = txtbxUsername;
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(Program.strConn);
+            conn.Open();
+
+            String sSQL = "select accountID, accountPassword from Account where accountID=@accountID and accountPassword=@accountPassword";
+            SqlCommand cmd = new SqlCommand(sSQL, conn);
+            cmd.Parameters.AddWithValue("@accountID", txtbxUsername.Text.ToString().Trim());
+            cmd.Parameters.AddWithValue("@accountPassword", txtbxPassword.Text.ToString().Trim());
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                String sessionACCT = (String)dt.Rows[0][0];
+                Program.sessionAccount = sessionACCT;
+                MessageBox.Show("Login Successful!", "Sucess Login");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Invalid Login. Please check Username or Password!", "Warning");
+            }
+        }
+
+        private void chkbxDisplayPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkbxDisplayPassword.Checked == true)
+            {
+                txtbxPassword.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                txtbxPassword.UseSystemPasswordChar = true;
+            }
         }
     }
 }
