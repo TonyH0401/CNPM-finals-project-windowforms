@@ -48,7 +48,7 @@ namespace Finals_Project
             da.Fill(dt);
             if (dt.Rows.Count > 0)
             {
-                String sessionACCT = (String)dt.Rows[0][0];
+                String sessionACCT = (String) dt.Rows[0][0];
                 Program.sessionAccount = sessionACCT;
                 MessageBox.Show("Login Successful!", "Sucess Login");
                 this.Close();

@@ -29,3 +29,17 @@ create table Product (
 	constraint PK_productID primary key(productID)
 )
 
+insert into Product values ('PROD1','Workout Powder',30,1000,'USA')
+insert into Product values ('PROD2','Workout Energy Bar',10,1500,'Germany')
+insert into Product values ('PROD3','Static Energy Drink',20,1000,'Vietnam')
+insert into Product values ('PROD4','Chicken Salad',40,1000,'China')
+select * from Product
+
+create table Store (
+	StoreID varchar(255) not null,
+	StoreName nvarchar(255) not null,
+	productPrice int not null,
+	productQuantity int not null,
+	productOrigin nvarchar(255) not null,
+	constraint PK_productID primary key(productID)
+)
