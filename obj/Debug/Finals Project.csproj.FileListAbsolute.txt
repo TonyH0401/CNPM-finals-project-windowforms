@@ -1,0 +1,12 @@
+D:\TDTU\CNPM\Finals Project\bin\Debug\Finals Project.exe.config
+D:\TDTU\CNPM\Finals Project\bin\Debug\Finals Project.exe
+D:\TDTU\CNPM\Finals Project\bin\Debug\Finals Project.pdb
+D:\TDTU\CNPM\Finals Project\obj\Debug\Finals Project.csproj.AssemblyReference.cache
+D:\TDTU\CNPM\Finals Project\obj\Debug\Finals Project.csproj.SuggestedBindingRedirects.cache
+D:\TDTU\CNPM\Finals Project\obj\Debug\Finals_Project.Properties.Resources.resources
+D:\TDTU\CNPM\Finals Project\obj\Debug\Finals Project.csproj.GenerateResource.cache
+D:\TDTU\CNPM\Finals Project\obj\Debug\Finals Project.csproj.CoreCompileInputs.cache
+D:\TDTU\CNPM\Finals Project\obj\Debug\Finals Project.exe
+D:\TDTU\CNPM\Finals Project\obj\Debug\Finals Project.pdb
+D:\TDTU\CNPM\Finals Project\obj\Debug\Finals_Project.frmLogin.resources
+D:\TDTU\CNPM\Finals Project\obj\Debug\Finals_Project.frmMain.resources
