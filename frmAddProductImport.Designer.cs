@@ -47,17 +47,17 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.lblADDPROD = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblSessionUser = new System.Windows.Forms.Label();
+            this.txtbxSessionUser = new System.Windows.Forms.TextBox();
             this.lblProductChoose = new System.Windows.Forms.Label();
             this.lblStoreName = new System.Windows.Forms.Label();
             this.cbbxStoreName = new System.Windows.Forms.ComboBox();
             this.lblStoreLocation = new System.Windows.Forms.Label();
+            this.lblProductToImport = new System.Windows.Forms.Label();
             this.txtbxStoreID = new System.Windows.Forms.TextBox();
             this.txtbxStoreLocation = new System.Windows.Forms.TextBox();
             this.lblStoreID = new System.Windows.Forms.Label();
-            this.lblProductToImport = new System.Windows.Forms.Label();
             this.txtbxQuantityToImport = new System.Windows.Forms.TextBox();
-            this.lblSessionUser = new System.Windows.Forms.Label();
-            this.txtbxSessionUser = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAddedProduct)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -155,7 +155,7 @@
             this.dataGridViewAddedProduct.Name = "dataGridViewAddedProduct";
             this.dataGridViewAddedProduct.ReadOnly = true;
             this.dataGridViewAddedProduct.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewAddedProduct.Size = new System.Drawing.Size(546, 348);
+            this.dataGridViewAddedProduct.Size = new System.Drawing.Size(649, 348);
             this.dataGridViewAddedProduct.TabIndex = 11;
             // 
             // btnAdd
@@ -254,6 +254,23 @@
             this.panel2.Size = new System.Drawing.Size(344, 178);
             this.panel2.TabIndex = 19;
             // 
+            // lblSessionUser
+            // 
+            this.lblSessionUser.AutoSize = true;
+            this.lblSessionUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSessionUser.Location = new System.Drawing.Point(5, 18);
+            this.lblSessionUser.Name = "lblSessionUser";
+            this.lblSessionUser.Size = new System.Drawing.Size(99, 13);
+            this.lblSessionUser.TabIndex = 19;
+            this.lblSessionUser.Text = "Current Account";
+            // 
+            // txtbxSessionUser
+            // 
+            this.txtbxSessionUser.Location = new System.Drawing.Point(114, 18);
+            this.txtbxSessionUser.Name = "txtbxSessionUser";
+            this.txtbxSessionUser.Size = new System.Drawing.Size(96, 20);
+            this.txtbxSessionUser.TabIndex = 20;
+            // 
             // lblProductChoose
             // 
             this.lblProductChoose.AutoSize = true;
@@ -292,6 +309,16 @@
             this.lblStoreLocation.TabIndex = 3;
             this.lblStoreLocation.Text = "Store Location";
             // 
+            // lblProductToImport
+            // 
+            this.lblProductToImport.AutoSize = true;
+            this.lblProductToImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProductToImport.Location = new System.Drawing.Point(5, 145);
+            this.lblProductToImport.Name = "lblProductToImport";
+            this.lblProductToImport.Size = new System.Drawing.Size(105, 13);
+            this.lblProductToImport.TabIndex = 4;
+            this.lblProductToImport.Text = "Product to Import";
+            // 
             // txtbxStoreID
             // 
             this.txtbxStoreID.Location = new System.Drawing.Point(114, 83);
@@ -315,16 +342,6 @@
             this.lblStoreID.TabIndex = 10;
             this.lblStoreID.Text = "Store ID";
             // 
-            // lblProductToImport
-            // 
-            this.lblProductToImport.AutoSize = true;
-            this.lblProductToImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProductToImport.Location = new System.Drawing.Point(5, 145);
-            this.lblProductToImport.Name = "lblProductToImport";
-            this.lblProductToImport.Size = new System.Drawing.Size(105, 13);
-            this.lblProductToImport.TabIndex = 4;
-            this.lblProductToImport.Text = "Product to Import";
-            // 
             // txtbxQuantityToImport
             // 
             this.txtbxQuantityToImport.Location = new System.Drawing.Point(114, 145);
@@ -332,28 +349,11 @@
             this.txtbxQuantityToImport.Size = new System.Drawing.Size(79, 20);
             this.txtbxQuantityToImport.TabIndex = 8;
             // 
-            // lblSessionUser
-            // 
-            this.lblSessionUser.AutoSize = true;
-            this.lblSessionUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSessionUser.Location = new System.Drawing.Point(5, 18);
-            this.lblSessionUser.Name = "lblSessionUser";
-            this.lblSessionUser.Size = new System.Drawing.Size(99, 13);
-            this.lblSessionUser.TabIndex = 19;
-            this.lblSessionUser.Text = "Current Account";
-            // 
-            // txtbxSessionUser
-            // 
-            this.txtbxSessionUser.Location = new System.Drawing.Point(114, 18);
-            this.txtbxSessionUser.Name = "txtbxSessionUser";
-            this.txtbxSessionUser.Size = new System.Drawing.Size(96, 20);
-            this.txtbxSessionUser.TabIndex = 20;
-            // 
             // frmAddProductImport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(914, 455);
+            this.ClientSize = new System.Drawing.Size(1015, 455);
             this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.lblADDPROD);

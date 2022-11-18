@@ -13,7 +13,6 @@ create table Account (
 	constraint PK_accountID primary key(accountID)
 )
 
-
 insert into Account values ('ACCT1', '123','Nguyễn', 'Toàn', 'nguyenvantoan@gmail.com','111-222-333','123 Nguyễn Văn Cừ, F.1, Q.1, TPHCM')
 insert into Account values ('ACCT2', '123','Nguyễn', 'Hoàng', 'nguyenhuyhoang@gmail.com','444-555-777','123 Nguyễn Khuyến, F.2, Q.2, HN')
 insert into Account values ('STRMNGR1', '123','Hồ', 'Toàn', 'hovantoan@gmail.com','222-222-333','123 Nguyễn Bỉnh Khiêm, F.3, Q.3, TPHCM')
@@ -35,6 +34,7 @@ insert into Product values ('PROD3','Static Energy Drink',20,1000,'Vietnam')
 insert into Product values ('PROD4','Chicken Salad',40,1000,'China')
 select * from Product
 
+drop table Store
 create table Store (
 	storeID varchar(255) not null,
 	storeName nvarchar(255) not null,
