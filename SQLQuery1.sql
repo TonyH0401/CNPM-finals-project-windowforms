@@ -36,10 +36,15 @@ insert into Product values ('PROD4','Chicken Salad',40,1000,'China')
 select * from Product
 
 create table Store (
-	StoreID varchar(255) not null,
-	StoreName nvarchar(255) not null,
-	productPrice int not null,
-	productQuantity int not null,
-	productOrigin nvarchar(255) not null,
-	constraint PK_productID primary key(productID)
+	storeID varchar(255) not null,
+	storeName nvarchar(255) not null,
+	storeLocation nvarchar(255) not null,
+	constraint PK_storeId primary key (storeID)
 )
+delete from Store
+
+insert into Store values ('ST1', 'CITYGYM L1', '1 Ngo Quyen, F.1, Q.1, TPHCM')
+insert into Store values ('ST2', 'YOGA FITNESS', '2 Hoang Hoa Tham, F.1, Q.1, TPHCM')
+insert into Store values ('ST3', 'HOME GYM', '2 Nguyen Hue, F.1, Q.1, TPHCM')
+insert into Store values ('ST4', 'CITYGYM L2', '1 Pasteur, F.1, Q.1, TPHCM')
+select * from Store
