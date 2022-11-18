@@ -13,11 +13,11 @@ using System.Windows.Forms.VisualStyles;
 
 namespace Finals_Project
 {
-    public partial class frmAddProductImport : Form
+    public partial class frmAddProductExport : Form
     {
         //the quantity after this will be saved into the database
         Dictionary<string, int> initialProductQuantity = new Dictionary<string, int>();
-        public frmAddProductImport()
+        public frmAddProductExport()
         {
             InitializeComponent();
         }
@@ -56,14 +56,17 @@ namespace Finals_Project
 
         private void initiateDataGridView()
         {
-            dataGridViewAddedProduct.ColumnCount = 6;
+            dataGridViewAddedProduct.ColumnCount = 8;
             dataGridViewAddedProduct.Columns[0].Name = "ProductID";
             dataGridViewAddedProduct.Columns[1].Name = "Product Name";
             dataGridViewAddedProduct.Columns[2].Name = "Product Price";
             dataGridViewAddedProduct.Columns[3].Name = "Quantity";
             dataGridViewAddedProduct.Columns[4].Name = "Total Price";
             dataGridViewAddedProduct.Columns[5].Name = "Store ID";
-
+            dataGridViewAddedProduct.Columns[6].Name = "Store Name";
+            dataGridViewAddedProduct.Columns[7].Name = "Store location";
+            dataGridViewAddedProduct.Columns[6].Visible = false;
+            dataGridViewAddedProduct.Columns[7].Visible = false;
 
         }
 
@@ -254,7 +257,7 @@ namespace Finals_Project
                             }
                             if(foundProduct == false)
                             {
-                                string[] row = new string[] { txtbxProductID.Text, cbbxProductID.Text.ToString(), txtbxProductPrice.Text, txtbxQuantityToImport.Text, (Int32.Parse(txtbxProductPrice.Text.ToString().Trim()) * Int32.Parse(txtbxQuantityToImport.Text.ToString().Trim())).ToString().Trim(), cbbxStoreName.SelectedValue.ToString().Trim() };
+                                string[] row = new string[] { txtbxProductID.Text, cbbxProductID.Text.ToString(), txtbxProductPrice.Text, txtbxQuantityToImport.Text, (Int32.Parse(txtbxProductPrice.Text.ToString().Trim()) * Int32.Parse(txtbxQuantityToImport.Text.ToString().Trim())).ToString().Trim(), cbbxStoreName.SelectedValue.ToString().Trim(), cbbxStoreName.Text.ToString().Trim(), txtbxStoreLocation.Text.ToString().Trim()};
                                 //update quantity of SERVER VIA DICTIONARY after import
                                 int temp_value = initialProductQuantity[cbbxProductID.SelectedValue.ToString().Trim()] - Int32.Parse(txtbxQuantityToImport.Text);
                                 initialProductQuantity[cbbxProductID.SelectedValue.ToString().Trim()] = temp_value;
@@ -266,17 +269,71 @@ namespace Finals_Project
                             MessageBox.Show("Successfully Added", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             txtbxQuantityToImport.Clear();
                         }
-                    }
-
-                   
-       
+                    }                   
                 }
-
-
-                //save current account, storeID, productID, productQuantity, totalprice, created time, total price bill
-                //also save current product quantity after 
+                //create new import code
+                //save current account,, storeID, productID, productQuantity, totalprice, created time, total price bill
+                
+                //also save current product quantity after. when delete remember to refill product quantity
             }
         }
 
+        private void dataGridViewAddedProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnDelete.Enabled = true;
+
+            foreach (DataGridViewRow row in dataGridViewAddedProduct.SelectedRows)
+            {
+                cbbxProductID.Text = row.Cells[1].Value.ToString();
+                txtbxProductID.Text = row.Cells[0].Value.ToString();
+                txtbxProductPrice.Text = row.Cells[2].Value.ToString();
+                txtbxProductQuantity.Text = initialProductQuantity[txtbxProductID.Text.ToString().Trim()].ToString().Trim();
+
+                //cbbxStoreName
+                cbbxStoreName.Text = row.Cells[6].Value.ToString();
+                txtbxStoreID.Text = row.Cells[5].Value.ToString();
+                txtbxStoreLocation.Text = row.Cells[7].Value.ToString();
+                txtbxQuantityToImport.Text = row.Cells[3].Value.ToString();
+
+
+
+                //dataGridViewAddedProduct.Rows.RemoveAt(row.Index);
+                ////update product quantity
+                //initialProductQuantity[row.Cells[0].Value.ToString().Trim()] = initialProductQuantity[txtbxProductID.Text.ToString().Trim()] + Int32.Parse(row.Cells[3].Value.ToString().Trim());
+                //MessageBox.Show(initialProductQuantity[row.Cells[0].Value.ToString().Trim()].ToString());
+
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            foreach(DataGridViewRow cRow2 in dataGridViewAddedProduct.SelectedRows)
+            {
+                initialProductQuantity[cbbxProductID.SelectedValue.ToString().Trim()] = initialProductQuantity[txtbxProductID.Text.ToString().Trim()] + Int32.Parse(txtbxQuantityToImport.Text.ToString().Trim());
+                txtbxProductQuantity.Text = initialProductQuantity[cbbxProductID.SelectedValue.ToString().Trim()].ToString().Trim();
+                //MessageBox.Show(cRow2.Cells[0].Value.ToString());
+                //remember to update the quantity 
+            }
+            
+            foreach (DataGridViewRow cRow in dataGridViewAddedProduct.SelectedRows)
+            {
+                dataGridViewAddedProduct.Rows.RemoveAt(cRow.Index);
+            }
+
+            txtbxQuantityToImport.Clear();
+
+            //initialProductQuantity[row.Cells[0].Value.ToString().Trim()] = initialProductQuantity[txtbxProductID.Text.ToString().Trim()] + Int32.Parse(row.Cells[3].Value.ToString().Trim());
+            //MessageBox.Show(initialProductQuantity[row.Cells[0].Value.ToString().Trim()].ToString());
+
+            //DataGridViewRow row = dataGridViewAddedProduct.SelectedRows;
+            //dataGridViewAddedProduct.Rows.RemoveAt(row.Index);
+            ////update product quantity
+
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

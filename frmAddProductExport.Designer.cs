@@ -1,6 +1,6 @@
 ﻿namespace Finals_Project
 {
-    partial class frmAddProductImport
+    partial class frmAddProductExport
     {
         /// <summary>
         /// Required designer variable.
@@ -151,21 +151,25 @@
             this.dataGridViewAddedProduct.AllowUserToAddRows = false;
             this.dataGridViewAddedProduct.AllowUserToDeleteRows = false;
             this.dataGridViewAddedProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewAddedProduct.Location = new System.Drawing.Point(364, 1);
+            this.dataGridViewAddedProduct.Location = new System.Drawing.Point(359, 8);
             this.dataGridViewAddedProduct.Name = "dataGridViewAddedProduct";
             this.dataGridViewAddedProduct.ReadOnly = true;
             this.dataGridViewAddedProduct.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewAddedProduct.Size = new System.Drawing.Size(649, 348);
             this.dataGridViewAddedProduct.TabIndex = 11;
+            this.dataGridViewAddedProduct.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewAddedProduct_CellContentClick);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(364, 362);
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Location = new System.Drawing.Point(397, 378);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(93, 27);
+            this.btnAdd.Size = new System.Drawing.Size(116, 52);
             this.btnAdd.TabIndex = 12;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Text = "&Add";
+            this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // panel1
@@ -199,16 +203,21 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(475, 401);
+            this.btnDelete.BackColor = System.Drawing.Color.Red;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnDelete.Location = new System.Drawing.Point(695, 378);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(93, 27);
+            this.btnDelete.Size = new System.Drawing.Size(116, 52);
             this.btnDelete.TabIndex = 14;
             this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(675, 387);
+            this.button3.Location = new System.Drawing.Point(892, 397);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(93, 27);
             this.button3.TabIndex = 16;
@@ -217,12 +226,17 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(364, 401);
+            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnUpdate.Location = new System.Drawing.Point(548, 378);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(93, 27);
+            this.btnUpdate.Size = new System.Drawing.Size(116, 52);
             this.btnUpdate.TabIndex = 15;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Text = "&Update";
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // lblADDPROD
             // 
@@ -315,9 +329,9 @@
             this.lblProductToImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProductToImport.Location = new System.Drawing.Point(5, 145);
             this.lblProductToImport.Name = "lblProductToImport";
-            this.lblProductToImport.Size = new System.Drawing.Size(105, 13);
+            this.lblProductToImport.Size = new System.Drawing.Size(106, 13);
             this.lblProductToImport.TabIndex = 4;
-            this.lblProductToImport.Text = "Product to Import";
+            this.lblProductToImport.Text = "Product to Export";
             // 
             // txtbxStoreID
             // 
@@ -349,10 +363,11 @@
             this.txtbxQuantityToImport.Size = new System.Drawing.Size(79, 20);
             this.txtbxQuantityToImport.TabIndex = 8;
             // 
-            // frmAddProductImport
+            // frmAddProductExport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Tan;
             this.ClientSize = new System.Drawing.Size(1015, 455);
             this.ControlBox = false;
             this.Controls.Add(this.panel2);
@@ -363,8 +378,8 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dataGridViewAddedProduct);
-            this.Name = "frmAddProductImport";
-            this.Text = "frmAddProductImport";
+            this.Name = "frmAddProductExport";
+            this.Text = "frmAddProductExport";
             this.Load += new System.EventHandler(this.frmAddProductImport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAddedProduct)).EndInit();
             this.panel1.ResumeLayout(false);
