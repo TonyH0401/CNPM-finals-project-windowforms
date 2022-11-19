@@ -11,3 +11,4 @@ D:\TDTU\CNPM\Finals Project\obj\Debug\Finals Project.pdb
 D:\TDTU\CNPM\Finals Project\obj\Debug\Finals_Project.frmLogin.resources
 D:\TDTU\CNPM\Finals Project\obj\Debug\Finals_Project.frmMain.resources
 D:\TDTU\CNPM\Finals Project\obj\Debug\Finals_Project.frmAddProductExport.resources
+D:\TDTU\CNPM\Finals Project\obj\Debug\Finals_Project.frmCreateImport.resources

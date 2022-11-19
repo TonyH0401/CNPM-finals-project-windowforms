@@ -53,6 +53,12 @@
     <Compile Include="frmAddProductExport.Designer.cs">
       <DependentUpon>frmAddProductExport.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCreateImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCreateImport.Designer.cs">
+      <DependentUpon>frmCreateImport.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAddProductExport.resx">
       <DependentUpon>frmAddProductExport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCreateImport.resx">
+      <DependentUpon>frmCreateImport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
