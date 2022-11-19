@@ -200,9 +200,65 @@ namespace Finals_Project
                     }
                 }
             }
-            if
+            if(rdbtnImportNewProduct.Checked == true)
             {
+                int pNameNew = txtbxProductName.Text.ToString().Trim().Length;
+                int pIDNew = txtbxProductID.Text.ToString().Trim().Length;
+                int pQuantityNew = txtbxProductQuantityNew.Text.ToString().Trim().Length;
+                int pPriceNew = txtbxProductPrice.Text.ToString().Trim().Length;
+                int pOriginNew = txtbxProductOrigin.Text.ToString().Trim().Length;
 
+                if((pNameNew * pIDNew * pQuantityNew * pPriceNew * pOriginNew) == 0)
+                {
+                    MessageBox.Show("Please fill in all the correct information", "Warning");
+                }
+                else
+                {
+                    int n, m;
+                    bool isNumericQuantity = int.TryParse(txtbxProductQuantityNew.Text.ToString().Trim(), out n);
+                    bool isNumberPrice = int.TryParse(txtbxProductPrice.Text.ToString().Trim(), out m);
+                    if((isNumericQuantity && isNumberPrice) == false)
+                    {
+                        MessageBox.Show("Wrong data input type", "Warning");
+                    }
+                    else
+                    {
+                        productID = txtbxProductID.Text.ToString().ToUpper().Trim();
+                        productName = txtbxProductName.Text.ToString().Trim();
+                        productPrice = txtbxProductPrice.Text.ToString().Trim();
+                        productOrigin = txtbxProductOrigin.Text.ToString().Trim();
+                        productQuantity = txtbxProductQuantityNew.Text.ToString().Trim();
+
+                        int rowIndex = -1;
+                        String searchValuePROD = productID;
+                        bool foundProduct = false;
+                        //add to an existing product in the datagrid
+                        foreach (DataGridViewRow row in dataGridViewImportProduct.Rows)
+                        {
+                            if (row.Cells[0].Value.ToString().Equals(searchValuePROD) == true)
+                            {
+                                row.Cells[3].Value = Int32.Parse(row.Cells[3].Value.ToString().Trim()) + Int32.Parse(txtbxProductQuantityOld.Text.ToString().Trim());
+                                row.Cells[5].Value = Int32.Parse(row.Cells[2].Value.ToString().Trim()) * Int32.Parse(row.Cells[3].Value.ToString().Trim());
+                                rowIndex = row.Index;
+                                foundProduct = true;
+                                break;
+                            }
+                        }
+                        //add new data to datagrid
+                        if (foundProduct == false)
+                        {
+                            String totalPrice = (Int32.Parse(productPrice) * Int32.Parse(productQuantity)).ToString().Trim();
+                            string[] row = new string[] { productID, productName, productPrice, productQuantity, productOrigin, totalPrice };
+                            dataGridViewImportProduct.Rows.Add(row);
+                        }
+                        MessageBox.Show("Successfully Added", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtbxProductID.Clear();
+                        txtbxProductName.Clear();
+                        txtbxProductPrice.Clear();
+                        txtbxProductOrigin.Clear();
+                        txtbxProductQuantityNew.Clear();
+                    }
+                }
             }
         }
     }
