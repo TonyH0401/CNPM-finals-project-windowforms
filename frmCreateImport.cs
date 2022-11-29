@@ -14,6 +14,7 @@ namespace Finals_Project
     public partial class frmCreateImport : Form
     {
         //Dictionary<string, int> initialProductQuantity = new Dictionary<string, int>();
+
         public frmCreateImport()
         {
             InitializeComponent();
@@ -21,6 +22,13 @@ namespace Finals_Project
 
         private void frmCreateImport_Load(object sender, EventArgs e)
         {
+            initiateComponentsOnLoad(); 
+            initiateDataGridView();
+        }
+
+        private void initiateComponentsOnLoad()
+        {
+            //pre-exist products
             cbbxProductName.Enabled = false;
             txtbxProductIDOld.Enabled = false;
             txtbxProductIDOld.ReadOnly = true;
@@ -30,15 +38,15 @@ namespace Finals_Project
             txtbxProductPriceOld.ReadOnly = true;
             txtbxProductQuantityOld.Enabled = false;
 
+            //new products
             txtbxProductID.Enabled = false;
             txtbxProductName.Enabled = false;
             txtbxProductQuantityNew.Enabled = false;
             txtbxProductPrice.Enabled = false;
             txtbxProductOrigin.Enabled = false;
 
-            initiateDataGridView();
-
             btnAdd.Enabled = false;
+            btnDelete.Enabled = false;
         }
         private void initiateDataGridView()
         {
@@ -59,6 +67,7 @@ namespace Finals_Project
             if(rdbtnImportNewProduct.Checked == true)
             {
                 this.ActiveControl = txtbxProductName;
+
                 txtbxProductID.Enabled = true;
                 txtbxProductName.Enabled = true;
                 txtbxProductOrigin.Enabled = true;
@@ -74,6 +83,7 @@ namespace Finals_Project
             if(rdbtnImportOldProduct.Checked == true)
             {
                 this.ActiveControl = txtbxProductQuantityOld;
+
                 cbbxProductName.Enabled = true;
 
                 txtbxProductID.Enabled = false;
@@ -83,13 +93,9 @@ namespace Finals_Project
                 txtbxProductQuantityNew.Enabled = false;
 
                 btnAdd.Enabled = true;
+
                 loadComboBoxOldProduct();
             }
-
-        }
-        private void importOldProduct()
-        {
-            
         }
         private void loadComboBoxOldProduct()
         {
@@ -138,9 +144,10 @@ namespace Finals_Project
         }
         private void cbbxProductName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            loadOtherDataFromComboBoxOldProduct();
             this.ActiveControl = txtbxProductQuantityOld;
             txtbxProductQuantityOld.Enabled = true;
+
+            loadOtherDataFromComboBoxOldProduct();
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -196,7 +203,7 @@ namespace Finals_Project
                             dataGridViewImportProduct.Rows.Add(row);
                         }
                         MessageBox.Show("Successfully Added", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txtbxProductQuantityOld.Clear();
+                        clearDataFromInsert();
                     }
                 }
             }
@@ -252,14 +259,30 @@ namespace Finals_Project
                             dataGridViewImportProduct.Rows.Add(row);
                         }
                         MessageBox.Show("Successfully Added", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txtbxProductID.Clear();
-                        txtbxProductName.Clear();
-                        txtbxProductPrice.Clear();
-                        txtbxProductOrigin.Clear();
-                        txtbxProductQuantityNew.Clear();
+                        clearDataFromInsert();
                     }
                 }
             }
         }
+        public void clearDataFromInsert()
+        {
+            //old products sections
+            //cbbxProductName.SelectedIndex = -1;
+            txtbxProductIDOld.Clear();
+            txtbxProductPriceOld.Clear();
+            txtbxProductOriginOld.Clear();
+            txtbxProductQuantityOld.Clear();
+            //new products section
+            txtbxProductID.Clear();
+            txtbxProductName.Clear();
+            txtbxProductPrice.Clear();
+            txtbxProductOrigin.Clear();
+            txtbxProductQuantityNew.Clear();
+        }
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            clearDataFromInsert();
+        }
+
     }
 }

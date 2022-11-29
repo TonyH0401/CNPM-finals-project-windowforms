@@ -46,17 +46,20 @@
             this.lblProductOrigin = new System.Windows.Forms.Label();
             this.txtbxProductName = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtbxProductOriginOld = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtbxProductPriceOld = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtbxProductIDOld = new System.Windows.Forms.TextBox();
             this.lblProductQuantityNew = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtbxProductOrigin = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtbxProductIDOld = new System.Windows.Forms.TextBox();
-            this.txtbxProductPriceOld = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtbxProductOriginOld = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.dataGridViewImportProduct = new System.Windows.Forms.DataGridView();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -107,11 +110,12 @@
             // 
             // panel1
             // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.lblTypeOfProduct);
             this.panel1.Controls.Add(this.btnChooseImportType);
             this.panel1.Controls.Add(this.rdbtnImportOldProduct);
             this.panel1.Controls.Add(this.rdbtnImportNewProduct);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(23, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(150, 100);
             this.panel1.TabIndex = 5;
@@ -217,6 +221,7 @@
             // 
             // panel2
             // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.txtbxProductOriginOld);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.txtbxProductPriceOld);
@@ -227,75 +232,10 @@
             this.panel2.Controls.Add(this.cbbxProductName);
             this.panel2.Controls.Add(this.lblProductQuantity);
             this.panel2.Controls.Add(this.txtbxProductQuantityOld);
-            this.panel2.Location = new System.Drawing.Point(188, 12);
+            this.panel2.Location = new System.Drawing.Point(216, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(250, 188);
             this.panel2.TabIndex = 18;
-            // 
-            // lblProductQuantityNew
-            // 
-            this.lblProductQuantityNew.AutoSize = true;
-            this.lblProductQuantityNew.Location = new System.Drawing.Point(10, 78);
-            this.lblProductQuantityNew.Name = "lblProductQuantityNew";
-            this.lblProductQuantityNew.Size = new System.Drawing.Size(83, 13);
-            this.lblProductQuantityNew.TabIndex = 19;
-            this.lblProductQuantityNew.Text = "Product Quanity";
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.txtbxProductOrigin);
-            this.panel3.Controls.Add(this.lblProductID);
-            this.panel3.Controls.Add(this.lblProductQuantityNew);
-            this.panel3.Controls.Add(this.txtbxProductPrice);
-            this.panel3.Controls.Add(this.txtbxProductQuantityNew);
-            this.panel3.Controls.Add(this.txtbxProductID);
-            this.panel3.Controls.Add(this.lblProductPrice);
-            this.panel3.Controls.Add(this.txtbxProductName);
-            this.panel3.Controls.Add(this.lblProductName);
-            this.panel3.Controls.Add(this.lblProductOrigin);
-            this.panel3.Location = new System.Drawing.Point(531, 12);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(251, 188);
-            this.panel3.TabIndex = 19;
-            // 
-            // txtbxProductOrigin
-            // 
-            this.txtbxProductOrigin.Location = new System.Drawing.Point(121, 150);
-            this.txtbxProductOrigin.Name = "txtbxProductOrigin";
-            this.txtbxProductOrigin.Size = new System.Drawing.Size(116, 20);
-            this.txtbxProductOrigin.TabIndex = 20;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 47);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 13);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "Product ID";
-            // 
-            // txtbxProductIDOld
-            // 
-            this.txtbxProductIDOld.Location = new System.Drawing.Point(117, 47);
-            this.txtbxProductIDOld.Name = "txtbxProductIDOld";
-            this.txtbxProductIDOld.Size = new System.Drawing.Size(116, 20);
-            this.txtbxProductIDOld.TabIndex = 21;
-            // 
-            // txtbxProductPriceOld
-            // 
-            this.txtbxProductPriceOld.Location = new System.Drawing.Point(117, 82);
-            this.txtbxProductPriceOld.Name = "txtbxProductPriceOld";
-            this.txtbxProductPriceOld.Size = new System.Drawing.Size(116, 20);
-            this.txtbxProductPriceOld.TabIndex = 21;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 82);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 13);
-            this.label2.TabIndex = 22;
-            this.label2.Text = "Product Price";
             // 
             // txtbxProductOriginOld
             // 
@@ -313,9 +253,75 @@
             this.label3.TabIndex = 21;
             this.label3.Text = "Originate";
             // 
+            // txtbxProductPriceOld
+            // 
+            this.txtbxProductPriceOld.Location = new System.Drawing.Point(117, 82);
+            this.txtbxProductPriceOld.Name = "txtbxProductPriceOld";
+            this.txtbxProductPriceOld.Size = new System.Drawing.Size(116, 20);
+            this.txtbxProductPriceOld.TabIndex = 21;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 82);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 13);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "Product Price";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 47);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Product ID";
+            // 
+            // txtbxProductIDOld
+            // 
+            this.txtbxProductIDOld.Location = new System.Drawing.Point(117, 47);
+            this.txtbxProductIDOld.Name = "txtbxProductIDOld";
+            this.txtbxProductIDOld.Size = new System.Drawing.Size(116, 20);
+            this.txtbxProductIDOld.TabIndex = 21;
+            // 
+            // lblProductQuantityNew
+            // 
+            this.lblProductQuantityNew.AutoSize = true;
+            this.lblProductQuantityNew.Location = new System.Drawing.Point(10, 78);
+            this.lblProductQuantityNew.Name = "lblProductQuantityNew";
+            this.lblProductQuantityNew.Size = new System.Drawing.Size(83, 13);
+            this.lblProductQuantityNew.TabIndex = 19;
+            this.lblProductQuantityNew.Text = "Product Quanity";
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.txtbxProductOrigin);
+            this.panel3.Controls.Add(this.lblProductID);
+            this.panel3.Controls.Add(this.lblProductQuantityNew);
+            this.panel3.Controls.Add(this.txtbxProductPrice);
+            this.panel3.Controls.Add(this.txtbxProductQuantityNew);
+            this.panel3.Controls.Add(this.txtbxProductID);
+            this.panel3.Controls.Add(this.lblProductPrice);
+            this.panel3.Controls.Add(this.txtbxProductName);
+            this.panel3.Controls.Add(this.lblProductName);
+            this.panel3.Controls.Add(this.lblProductOrigin);
+            this.panel3.Location = new System.Drawing.Point(523, 12);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(251, 188);
+            this.panel3.TabIndex = 19;
+            // 
+            // txtbxProductOrigin
+            // 
+            this.txtbxProductOrigin.Location = new System.Drawing.Point(121, 150);
+            this.txtbxProductOrigin.Name = "txtbxProductOrigin";
+            this.txtbxProductOrigin.Size = new System.Drawing.Size(116, 20);
+            this.txtbxProductOrigin.TabIndex = 20;
+            // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(52, 157);
+            this.btnAdd.Location = new System.Drawing.Point(12, 127);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 20;
@@ -328,12 +334,39 @@
             this.dataGridViewImportProduct.AllowUserToAddRows = false;
             this.dataGridViewImportProduct.AllowUserToDeleteRows = false;
             this.dataGridViewImportProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewImportProduct.Location = new System.Drawing.Point(188, 206);
+            this.dataGridViewImportProduct.Location = new System.Drawing.Point(202, 206);
             this.dataGridViewImportProduct.Name = "dataGridViewImportProduct";
-            this.dataGridViewImportProduct.ReadOnly = true;
             this.dataGridViewImportProduct.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewImportProduct.Size = new System.Drawing.Size(594, 183);
             this.dataGridViewImportProduct.TabIndex = 21;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(107, 128);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 22;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(107, 177);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.TabIndex = 24;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(12, 177);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 23;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // frmCreateImport
             // 
@@ -341,6 +374,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 401);
             this.ControlBox = false;
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.dataGridViewImportProduct);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.panel3);
@@ -391,5 +427,8 @@
         private System.Windows.Forms.TextBox txtbxProductIDOld;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.DataGridView dataGridViewImportProduct;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnClear;
     }
 }
