@@ -55,12 +55,16 @@ drop table Import
 create table Import (
 	importID nvarchar(255) not null,
 	constraint PK_importID primary key(importID),
-	importTotalQuantity int,
+	importTotalProduct int,
 	importTotalPrice int,
 	importCreated date,
 	accountID varchar(255) not null,
 	constraint FK_Import_Account_accountID foreign key(accountID) references Account(accountID)
 )
+--insert into Import values ('1', '1', '1', GETDATE(), 'admin')
+--select * from Import
+--delete from Import where importID = '1'
+
 drop table ImportDetail
 create table ImportDetail(
 	importID nvarchar(255) not null,

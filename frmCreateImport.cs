@@ -361,37 +361,114 @@ namespace Finals_Project
                 this.Close();
             }
         }
-        private void btnCreate_Click(object sender, EventArgs e)
+        public int countImportBill()
         {
+            int importBillCounter = 0;
+
+            SqlConnection conn = new SqlConnection(Program.strConn);
+            conn.Open();
+
+            String sSQL = "select importID from Import";
+            SqlCommand cmd = new SqlCommand(sSQL, conn);
+            
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                importBillCounter = dt.Rows.Count;
+            }
+            else
+            {
+                importBillCounter = 0;
+            }
+            return importBillCounter;
+        }
+        public String createImportBillID()
+        {
+            String billNumber = (countImportBill() + 1).ToString().Trim();
+            String dateTime = DateTime.Now.ToString("yyyy-MM-dd").Replace("-", "");
+            String billID = "IMPRT" + dateTime + billNumber;
+            return billID;
+        }
+        public String getImportBillTotalPrice()
+        {
+            int totalPrice = 0;
+            foreach(DataGridViewRow row in dataGridViewImportProduct.Rows)
+            {
+                String temp = row.Cells[5].Value.ToString().Trim();
+                totalPrice = totalPrice + Int32.Parse(temp);
+            }
+            return totalPrice.ToString().Trim();
+        }
+        public void insertImportBill()
+        {
+            String importID = createImportBillID();
+            String importCreated = DateTime.Now.ToString("yyyy-MM-dd").Trim();
+            String importTotalProduct = dataGridViewImportProduct.Rows.Count.ToString().Trim();
+            String accountID = sessionAccount;
+            String importTotalPrice = getImportBillTotalPrice();
+
+            MessageBox.Show(importID + ";" + importTotalProduct + ";" + importTotalPrice + ";" + importCreated + ";" + accountID + "");
+            //try
+            //{
+            //    SqlConnection conn = new SqlConnection(Program.strConn);
+            //    conn.Open();
+
+            //    String sSQL = "insert into Import values ";
+            //    SqlCommand cmd = new SqlCommand(sSQL, conn);
+
+            //    int i = cmd.ExecuteNonQuery();
+            //    if (i != 0)
+            //    {
+            //        MessageBox.Show("Saved");
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Error");
+            //    }
+            //    conn.Close();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Some error occur: " + ex.Message + " - " + ex.Source);
+            //}
+        }
+        private void btnCreate_Click(object sender, EventArgs e)
+        { 
             if(dataGridViewImportProduct.Rows.Count == 0)
             {
                 MessageBox.Show("Can not create an Import Request because there are no data", "Warning no data on create", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-//                create table Import(
-//    importID nvarchar(255) not null,
-//    constraint PK_importID primary key(importID),
-//    importTotalQuantity int,
-//    importTotalPrice int,
-//    importCreated date,
-//    accountID varchar(255) not null,
-//    constraint FK_Import_Account_accountID foreign key(accountID) references Account(accountID)
-//)
+                insertImportBill();
+                
 
-//create table ImportDetail(
-//    importID nvarchar(255) not null,
-//	productID varchar(255) not null,
+                //create table Import(
+                //    importID nvarchar(255) not null,
+                //    constraint PK_importID primary key(importID),
+                //    importTotalProduct int,
+                //    importTotalPrice int,
+                //    importCreated date,
+                //    accountID varchar(255) not null,
+                //    constraint FK_Import_Account_accountID foreign key(accountID) references Account(accountID)
+                //)
 
-//	productName nvarchar(255) not null,
-//	productPrice int not null,
-//	productQuantity int not null,
-//	productOrigin nvarchar(255) not null,
-//	primary key(importID, productID),
+                //create table ImportDetail(
+                //    importID nvarchar(255) not null,
+                //	productID varchar(255) not null,
 
-//	constraint FK_ImportDetail_Import_importID foreign key(importID) references Import(importID),
-//	constraint FK_ImportDetail_Product_productID foreign key(productID) references Product(productID)
-//)
+                //	productName nvarchar(255) not null,
+                //	productPrice int not null,
+                //	productQuantity int not null,
+                //	productOrigin nvarchar(255) not null,
+                //	primary key(importID, productID),
+
+                //	constraint FK_ImportDetail_Import_importID foreign key(importID) references Import(importID),
+                //	constraint FK_ImportDetail_Product_productID foreign key(productID) references Product(productID)
+                //)
 
             }
         }
