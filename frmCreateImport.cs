@@ -14,7 +14,8 @@ namespace Finals_Project
     public partial class frmCreateImport : Form
     {
         //Dictionary<string, int> initialProductQuantity = new Dictionary<string, int>();
-
+        public String sessionAccount = "";
+        public String sessAccountPhone = "";
         public frmCreateImport()
         {
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace Finals_Project
         {
             initiateComponentsOnLoad(); 
             initiateDataGridView();
+            onFormLoadAccountSessionData();
         }
 
         private void initiateComponentsOnLoad()
@@ -44,6 +46,10 @@ namespace Finals_Project
             txtbxProductQuantityNew.Enabled = false;
             txtbxProductPrice.Enabled = false;
             txtbxProductOrigin.Enabled = false;
+
+            //account info
+            txtsessionAccount.Enabled = false;
+            txtsessionAccountPhone.Enabled = false;
 
             btnAdd.Enabled = false;
             btnDelete.Enabled = false;
@@ -151,6 +157,8 @@ namespace Finals_Project
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            btnDelete.Enabled = true;
+
             String productID = "";
             String productName = "";
             String productPrice = "";
@@ -161,6 +169,10 @@ namespace Finals_Project
                 if (txtbxProductQuantityOld.Text.ToString().Trim().Equals("") == true)
                 {
                     MessageBox.Show("Please fill in the quantity!", "Warning Box");
+                }
+                else if(txtbxProductOriginOld.Text.ToString().Trim().Equals("") == true)
+                {
+                    MessageBox.Show("Please choose the product first!", "Warning Box");
                 }
                 else
                 {
@@ -283,6 +295,105 @@ namespace Finals_Project
         {
             clearDataFromInsert();
         }
+        public String getSessionUserDataFromProgram()
+        {
+            String value0 = Program.sessionAccount;
+            if(value0.Length == 0)
+            {
+                return "admin";
+            }
+            else
+            {
+                return value0;
+            }
+        }
+        public void getSessionUserData()
+        {
+            SqlConnection conn = new SqlConnection(Program.strConn);
+            conn.Open();
 
+            String sSQL = "select accountID, accountPhone from Account where accountID=@accountID";
+            SqlCommand cmd = new SqlCommand(sSQL, conn);
+            cmd.Parameters.AddWithValue("@accountID", getSessionUserDataFromProgram().Trim());
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                String sessionID = (String)dt.Rows[0][0];
+                String sessionPhone = (String)dt.Rows[0][1];
+                sessionAccount = sessionID;
+                sessAccountPhone = sessionPhone;
+            }
+            else
+            {
+                MessageBox.Show("Invalid Login. Please check Username or Password!", "Warning");
+            }
+        }
+        public void onFormLoadAccountSessionData()
+        {
+            getSessionUserData();
+            txtsessionAccount.Text = sessionAccount;
+            txtsessionAccountPhone.Text = sessAccountPhone;
+        }
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if(dataGridViewImportProduct.Rows.Count == 0)
+            {
+                MessageBox.Show("There are no products to Import", "Warning box");
+                btnDelete.Enabled = false;
+            }
+            else
+            {
+                foreach (DataGridViewRow item in this.dataGridViewImportProduct.SelectedRows)
+                {
+                    dataGridViewImportProduct.Rows.RemoveAt(item.Index);
+                }
+            }   
+        }
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            DialogResult dt = MessageBox.Show("Do you want to Exit!?", "Exit System Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dt == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            if(dataGridViewImportProduct.Rows.Count == 0)
+            {
+                MessageBox.Show("Can not create an Import Request because there are no data", "Warning no data on create", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+//                create table Import(
+//    importID nvarchar(255) not null,
+//    constraint PK_importID primary key(importID),
+//    importTotalQuantity int,
+//    importTotalPrice int,
+//    importCreated date,
+//    accountID varchar(255) not null,
+//    constraint FK_Import_Account_accountID foreign key(accountID) references Account(accountID)
+//)
+
+//create table ImportDetail(
+//    importID nvarchar(255) not null,
+//	productID varchar(255) not null,
+
+//	productName nvarchar(255) not null,
+//	productPrice int not null,
+//	productQuantity int not null,
+//	productOrigin nvarchar(255) not null,
+//	primary key(importID, productID),
+
+//	constraint FK_ImportDetail_Import_importID foreign key(importID) references Import(importID),
+//	constraint FK_ImportDetail_Product_productID foreign key(productID) references Product(productID)
+//)
+
+            }
+        }
     }
 }

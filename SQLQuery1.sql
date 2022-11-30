@@ -40,16 +40,38 @@ create table Store (
 	storeID varchar(255) not null,
 	storeName nvarchar(255) not null,
 	storeLocation nvarchar(255) not null,
+	taxValue int, 
 	constraint PK_storeId primary key (storeID)
 )
 delete from Store
-
-insert into Store values ('ST1', 'CITYGYM L1', '1 Ngo Quyen, F.1, Q.1, TPHCM')
-insert into Store values ('ST2', 'YOGA FITNESS', '2 Hoang Hoa Tham, F.1, Q.1, TPHCM')
-insert into Store values ('ST3', 'HOME GYM', '2 Nguyen Hue, F.1, Q.1, TPHCM')
-insert into Store values ('ST4', 'CITYGYM L2', '1 Pasteur, F.1, Q.1, TPHCM')
+insert into Store values ('ST1', 'CITYGYM L1', '1 Ngo Quyen, F.1, Q.1, TPHCM', 10)
+insert into Store values ('ST2', 'YOGA FITNESS', '2 Hoang Hoa Tham, F.1, Q.1, TPHCM', 15)
+insert into Store values ('ST3', 'HOME GYM', '2 Nguyen Hue, F.1, Q.1, TPHCM', 5)
+insert into Store values ('ST4', 'CITYGYM L2', '1 Pasteur, F.1, Q.1, TPHCM', 11)
 select * from Store
 
+--import, bill, export (bill and export hòa làm 1)
+drop table Import
 create table Import (
+	importID nvarchar(255) not null,
+	constraint PK_importID primary key(importID),
+	importTotalQuantity int,
+	importTotalPrice int,
+	importCreated date,
+	accountID varchar(255) not null,
+	constraint FK_Import_Account_accountID foreign key(accountID) references Account(accountID)
+)
+drop table ImportDetail
+create table ImportDetail(
+	importID nvarchar(255) not null,
+	productID varchar(255) not null,
 
+	productName nvarchar(255) not null,
+	productPrice int not null,
+	productQuantity int not null,
+	productOrigin nvarchar(255) not null,
+	primary key(importID, productID),
+
+	constraint FK_ImportDetail_Import_importID foreign key(importID) references Import(importID),
+	constraint FK_ImportDetail_Product_productID foreign key(productID) references Product(productID)
 )

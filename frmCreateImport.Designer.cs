@@ -60,10 +60,17 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.txtsessionAccountPhone = new System.Windows.Forms.TextBox();
+            this.txtsessionAccount = new System.Windows.Forms.TextBox();
+            this.lblAccount = new System.Windows.Forms.Label();
+            this.lblAccountPhone = new System.Windows.Forms.Label();
+            this.btnCreate = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImportProduct)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // rdbtnImportOldProduct
@@ -321,7 +328,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(12, 127);
+            this.btnAdd.Location = new System.Drawing.Point(16, 232);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 20;
@@ -342,25 +349,30 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(107, 128);
+            this.btnDelete.Location = new System.Drawing.Point(111, 232);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 22;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(107, 177);
+            this.btnClose.BackColor = System.Drawing.Color.Red;
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnClose.Location = new System.Drawing.Point(111, 281);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 24;
             this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(12, 177);
+            this.btnClear.Location = new System.Drawing.Point(16, 281);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 23;
@@ -368,12 +380,73 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel4.Controls.Add(this.txtsessionAccountPhone);
+            this.panel4.Controls.Add(this.txtsessionAccount);
+            this.panel4.Controls.Add(this.lblAccount);
+            this.panel4.Controls.Add(this.lblAccountPhone);
+            this.panel4.Location = new System.Drawing.Point(9, 121);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(186, 82);
+            this.panel4.TabIndex = 25;
+            // 
+            // txtsessionAccountPhone
+            // 
+            this.txtsessionAccountPhone.Location = new System.Drawing.Point(68, 51);
+            this.txtsessionAccountPhone.Name = "txtsessionAccountPhone";
+            this.txtsessionAccountPhone.Size = new System.Drawing.Size(100, 20);
+            this.txtsessionAccountPhone.TabIndex = 29;
+            // 
+            // txtsessionAccount
+            // 
+            this.txtsessionAccount.Location = new System.Drawing.Point(68, 14);
+            this.txtsessionAccount.Name = "txtsessionAccount";
+            this.txtsessionAccount.Size = new System.Drawing.Size(100, 20);
+            this.txtsessionAccount.TabIndex = 28;
+            // 
+            // lblAccount
+            // 
+            this.lblAccount.AutoSize = true;
+            this.lblAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAccount.Location = new System.Drawing.Point(15, 14);
+            this.lblAccount.Name = "lblAccount";
+            this.lblAccount.Size = new System.Drawing.Size(54, 13);
+            this.lblAccount.TabIndex = 26;
+            this.lblAccount.Text = "Account";
+            // 
+            // lblAccountPhone
+            // 
+            this.lblAccountPhone.AutoSize = true;
+            this.lblAccountPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAccountPhone.Location = new System.Drawing.Point(15, 50);
+            this.lblAccountPhone.Name = "lblAccountPhone";
+            this.lblAccountPhone.Size = new System.Drawing.Size(43, 13);
+            this.lblAccountPhone.TabIndex = 27;
+            this.lblAccountPhone.Text = "Phone";
+            // 
+            // btnCreate
+            // 
+            this.btnCreate.BackColor = System.Drawing.Color.Green;
+            this.btnCreate.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreate.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnCreate.Location = new System.Drawing.Point(27, 336);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(146, 53);
+            this.btnCreate.TabIndex = 26;
+            this.btnCreate.Text = "&Create Import";
+            this.btnCreate.UseVisualStyleBackColor = false;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            // 
             // frmCreateImport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 401);
             this.ControlBox = false;
+            this.Controls.Add(this.btnCreate);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnDelete);
@@ -392,6 +465,8 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImportProduct)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -430,5 +505,11 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lblAccount;
+        private System.Windows.Forms.TextBox txtsessionAccountPhone;
+        private System.Windows.Forms.TextBox txtsessionAccount;
+        private System.Windows.Forms.Label lblAccountPhone;
+        private System.Windows.Forms.Button btnCreate;
     }
 }
