@@ -486,13 +486,98 @@ namespace Finals_Project
                 }
             }
         }
-        public void checkProductExist()
+        public bool checkProductExist(String productID)
         {
+            SqlConnection conn = new SqlConnection(Program.strConn);
+            conn.Open();
 
+            String sSQL = "select * from Product where productID = @productID";
+            SqlCommand cmd = new SqlCommand(sSQL, conn);
+            cmd.Parameters.AddWithValue("@productID", productID);
+                
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public void insertProduct()
         {
+            foreach (DataGridViewRow row in dataGridViewImportProduct.Rows)
+            {
+                String productID = row.Cells[0].Value.ToString().Trim();
+                String productName = row.Cells[1].Value.ToString().Trim();
+                String productPrice = row.Cells[2].Value.ToString().Trim();
+                String productQuantity = row.Cells[3].Value.ToString().Trim();
+                String productOrigin = row.Cells[4].Value.ToString().Trim();
 
+                if(checkProductExist(productID) == true)
+                {
+                    try
+                    {
+                        SqlConnection conn = new SqlConnection(Program.strConn);
+                        conn.Open();
+
+                        String sSQL = "update Product set productQuantity = productQuantity + @productQuantity where productID = @productID";
+                        SqlCommand cmd = new SqlCommand(sSQL, conn);
+                        cmd.Parameters.AddWithValue("@productQuantity", productQuantity);
+                        cmd.Parameters.AddWithValue("@productID", productID);
+                        
+                        int i = cmd.ExecuteNonQuery();
+                        if (i != 0)
+                        {
+                            //MessageBox.Show("Saved");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error");
+                        }
+                        conn.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Some error occur: " + ex.Message + " - " + ex.Source);
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        SqlConnection conn = new SqlConnection(Program.strConn);
+                        conn.Open();
+
+                        String sSQL = "insert into Product values (@productID, @productName, @productPrice, @productQuantity, @productOrigin)";
+                        SqlCommand cmd = new SqlCommand(sSQL, conn);
+                        cmd.Parameters.AddWithValue("@productID", productID);
+                        cmd.Parameters.AddWithValue("@productName", productName);
+                        cmd.Parameters.AddWithValue("@productPrice", productPrice);
+                        cmd.Parameters.AddWithValue("@productQuantity", productQuantity);
+                        cmd.Parameters.AddWithValue("@productOrigin", productOrigin);
+
+                        int i = cmd.ExecuteNonQuery();
+                        if (i != 0)
+                        {
+                            //MessageBox.Show("Saved");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error");
+                        }
+                        conn.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Some error occur: " + ex.Message + " - " + ex.Source);
+                    }
+                }
+            }
         }
         private void btnCreate_Click(object sender, EventArgs e)
         { 
@@ -502,38 +587,21 @@ namespace Finals_Project
             }
             else
             {
-                String importBillID = createImportBillID();
-                insertImportBill(importBillID);
-                insertImportBillDetail(importBillID);
+                DialogResult dt = MessageBox.Show("Do you want to Create Import Bill", "System Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dt == DialogResult.Yes)
+                {
+                    //insert new product, error proof for FK
+                    insertProduct();
 
-                //a saved message here and an auto clear after, done with the clear function
+                    String importBillID = createImportBillID();
+                    insertImportBill(importBillID);
+                    insertImportBillDetail(importBillID);
 
-                
-
-                //create table Import(
-                //    importID nvarchar(255) not null,
-                //    constraint PK_importID primary key(importID),
-                //    importTotalProduct int,
-                //    importTotalPrice int,
-                //    importCreated date,
-                //    accountID varchar(255) not null,
-                //    constraint FK_Import_Account_accountID foreign key(accountID) references Account(accountID)
-                //)
-
-                //create table ImportDetail(
-                //    importID nvarchar(255) not null,
-                //	productID varchar(255) not null,
-
-                //	productName nvarchar(255) not null,
-                //	productPrice int not null,
-                //	productQuantity int not null,
-                //	productOrigin nvarchar(255) not null,
-                //	primary key(importID, productID),
-
-                //	constraint FK_ImportDetail_Import_importID foreign key(importID) references Import(importID),
-                //	constraint FK_ImportDetail_Product_productID foreign key(productID) references Product(productID)
-                //)
-
+                    MessageBox.Show("Created Import Bill: " + importBillID + "", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clearDataFromInsert();
+                    clearDataGridView();
+                }
+                //need to add question do you want to keep importing
             }
         }
     }

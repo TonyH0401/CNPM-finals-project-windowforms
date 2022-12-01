@@ -79,5 +79,9 @@ create table ImportDetail(
 	constraint FK_ImportDetail_Import_importID foreign key(importID) references Import(importID),
 	constraint FK_ImportDetail_Product_productID foreign key(productID) references Product(productID)
 )
+delete from ImportDetail
+delete from Import
 select * from Import
 select * from ImportDetail
+select * from Product
+delete from Product where productID = 'TSALAD-20'
