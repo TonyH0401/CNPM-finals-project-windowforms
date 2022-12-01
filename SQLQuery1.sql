@@ -79,3 +79,5 @@ create table ImportDetail(
 	constraint FK_ImportDetail_Import_importID foreign key(importID) references Import(importID),
 	constraint FK_ImportDetail_Product_productID foreign key(productID) references Product(productID)
 )
+select * from Import
+select * from ImportDetail

@@ -291,9 +291,15 @@ namespace Finals_Project
             txtbxProductOrigin.Clear();
             txtbxProductQuantityNew.Clear();
         }
+        public void clearDataGridView()
+        {
+            dataGridViewImportProduct.Rows.Clear();
+            dataGridViewImportProduct.Refresh();
+        }
         private void btnClear_Click(object sender, EventArgs e)
         {
             clearDataFromInsert();
+            clearDataGridView();
         }
         public String getSessionUserDataFromProgram()
         {
@@ -402,38 +408,91 @@ namespace Finals_Project
             }
             return totalPrice.ToString().Trim();
         }
-        public void insertImportBill()
+        public void insertImportBill(String importBillID)
         {
-            String importID = createImportBillID();
-            String importCreated = DateTime.Now.ToString("yyyy-MM-dd").Trim();
+            String importID = importBillID;
             String importTotalProduct = dataGridViewImportProduct.Rows.Count.ToString().Trim();
-            String accountID = sessionAccount;
             String importTotalPrice = getImportBillTotalPrice();
+            String importCreated = DateTime.Now.ToString("yyyy-MM-dd").Trim();
+            String accountID = sessionAccount;
 
-            MessageBox.Show(importID + ";" + importTotalProduct + ";" + importTotalPrice + ";" + importCreated + ";" + accountID + "");
-            //try
-            //{
-            //    SqlConnection conn = new SqlConnection(Program.strConn);
-            //    conn.Open();
+            try
+            {
+                SqlConnection conn = new SqlConnection(Program.strConn);
+                conn.Open();
 
-            //    String sSQL = "insert into Import values ";
-            //    SqlCommand cmd = new SqlCommand(sSQL, conn);
+                String sSQL = "insert into Import values (@importID, @importTotalProduct, @importTotalPrice, @importCreated, @accountID)";
+                SqlCommand cmd = new SqlCommand(sSQL, conn);
+                cmd.Parameters.AddWithValue("@importID", importID);
+                cmd.Parameters.AddWithValue("@importTotalProduct", importTotalProduct);
+                cmd.Parameters.AddWithValue("@importTotalPrice", importTotalPrice);
+                cmd.Parameters.AddWithValue("@importCreated", importCreated);
+                cmd.Parameters.AddWithValue("@accountID", accountID);
 
-            //    int i = cmd.ExecuteNonQuery();
-            //    if (i != 0)
-            //    {
-            //        MessageBox.Show("Saved");
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Error");
-            //    }
-            //    conn.Close();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Some error occur: " + ex.Message + " - " + ex.Source);
-            //}
+                int i = cmd.ExecuteNonQuery();
+                if (i != 0)
+                {
+                    //MessageBox.Show("Saved");
+                }
+                else
+                {
+                    MessageBox.Show("Error");
+                }
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Some error occur: " + ex.Message + " - " + ex.Source);
+            }
+        }
+        public void insertImportBillDetail(String importBillID)
+        {
+            foreach(DataGridViewRow row in dataGridViewImportProduct.Rows)
+            {
+                String productID = row.Cells[0].Value.ToString().Trim();
+                String productName = row.Cells[1].Value.ToString().Trim();
+                String productPrice = row.Cells[2].Value.ToString().Trim();
+                String productQuantity = row.Cells[3].Value.ToString().Trim();
+                String productOrigin = row.Cells[4].Value.ToString().Trim();
+
+                try
+                {
+                    SqlConnection conn = new SqlConnection(Program.strConn);
+                    conn.Open();
+
+                    String sSQL = "insert into ImportDetail values (@importID, @productID, @productName, @productPrice, @productQuantity, @productOrigin)";
+                    SqlCommand cmd = new SqlCommand(sSQL, conn);
+                    cmd.Parameters.AddWithValue("@importID", importBillID);
+                    cmd.Parameters.AddWithValue("@productID", productID);
+                    cmd.Parameters.AddWithValue("@productName", productName);
+                    cmd.Parameters.AddWithValue("@productPrice", productPrice);
+                    cmd.Parameters.AddWithValue("@productQuantity", productQuantity);
+                    cmd.Parameters.AddWithValue("@productOrigin", productOrigin);
+
+                    int i = cmd.ExecuteNonQuery();
+                    if (i != 0)
+                    {
+                        //MessageBox.Show("Saved");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error");
+                    }
+                    conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Some error occur: " + ex.Message + " - " + ex.Source);
+                }
+            }
+        }
+        public void checkProductExist()
+        {
+
+        }
+        public void insertProduct()
+        {
+
         }
         private void btnCreate_Click(object sender, EventArgs e)
         { 
@@ -443,7 +502,12 @@ namespace Finals_Project
             }
             else
             {
-                insertImportBill();
+                String importBillID = createImportBillID();
+                insertImportBill(importBillID);
+                insertImportBillDetail(importBillID);
+
+                //a saved message here and an auto clear after, done with the clear function
+
                 
 
                 //create table Import(
