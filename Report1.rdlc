@@ -11,7 +11,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="Products">
+    <DataSet Name="Product">
       <Query>
         <DataSourceName>Finals_Project</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -524,7 +524,7 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>Products</DataSetName>
+            <DataSetName>Product</DataSetName>
             <Top>1.82167in</Top>
             <Left>1.32167in</Left>
             <Height>0.5in</Height>
@@ -607,7 +607,9 @@
                     <Style />
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox4</rd:DefaultName>

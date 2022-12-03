@@ -15,8 +15,8 @@ namespace Finals_Project
     {
         public String sessionAccount = "";
         public String sessAccountPhone = "";
-        DataTable dtGlobal = new DataTable();
-        String totalGlobal = "";
+        DataTable dtProduct = new DataTable();
+        String dtProductTotal = "";
         public frmImport()
         {
             InitializeComponent();
@@ -24,7 +24,6 @@ namespace Finals_Project
 
         private void frmImport_Load(object sender, EventArgs e)
         { 
-            //this.reportViewer1.RefreshReport();
             initiateComponents();
             getSessionUserData();
             getImportID();
@@ -157,8 +156,9 @@ namespace Finals_Project
                 if (dt.Rows.Count > 0)
                 {
                     dataGridViewImportDetail.DataSource = dt;
-                    dtGlobal = dt;
-                    totalGlobal = dt.Rows.Count.ToString().Trim();
+                    //be used in ReportViewer
+                    dtProduct = dt;
+                    dtProductTotal = dt.Rows.Count.ToString().Trim();
                 }
                 else
                 {
@@ -221,12 +221,26 @@ namespace Finals_Project
         {
             this.frmImport_Load(null, EventArgs.Empty);
         }
-
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show(dtGlobal.Rows.Count.ToString());
-            frmPrint f = new frmPrint(dtGlobal, txtTotal.Text.ToString().Trim(), totalGlobal, txtImportID.Text, dateTimePickerImportCreated.Text, txtAccount.Text);
+            List<Product> dataSourceProduct = convertDataTableToListProduct(dtProduct);
+            frmPrint f = new frmPrint(dataSourceProduct, txtTotal.Text.ToString().Trim(), dtProductTotal, txtImportID.Text, dateTimePickerImportCreated.Text, txtAccount.Text);
             f.ShowDialog();
+        }
+        public List<Product> convertDataTableToListProduct(DataTable inputDataTable)
+        {
+            List<Product> res = new List<Product>();
+            foreach(DataRow row in inputDataTable.Rows)
+            {
+                Product product = new Product();
+                product.id = row[0].ToString();
+                product.name = row[1].ToString();
+                product.price = row[2].ToString();
+                product.quantity = row[3].ToString();
+                product.origin = row[4].ToString();
+                res.Add(product);
+            }
+            return res;
         }
     }
 }
