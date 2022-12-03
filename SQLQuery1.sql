@@ -70,6 +70,7 @@ create table ImportDetail(
 	importID nvarchar(255) not null,
 	productID varchar(255) not null,
 
+	--không cần thiết vì mình cũng sẽ phải add product trước r mới chạy được cái này
 	productName nvarchar(255) not null,
 	productPrice int not null,
 	productQuantity int not null,

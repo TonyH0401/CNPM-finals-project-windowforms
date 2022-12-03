@@ -24,6 +24,7 @@ namespace Finals_Project
         { 
             //this.reportViewer1.RefreshReport();
             initiateComponents();
+            getSessionUserData();
             getImportID();
         }
         public void initiateComponents()
@@ -169,6 +170,58 @@ namespace Finals_Project
         {
             getDataFromImportID();
             getDetailDataFromImportID();
+        }
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int itemCounter = listBoxImportID.Items.Count;
+            if(itemCounter == 0)
+            {
+                MessageBox.Show("There are no Import Bills to DELETE", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                String temp = listBoxImportID.Items[listBoxImportID.SelectedIndex].ToString();
+                try
+                {
+                    SqlConnection conn = new SqlConnection(Program.strConn);
+                    conn.Open();
+
+                    String sSQL = "select importID from Import";
+                    SqlCommand cmd = new SqlCommand(sSQL, conn);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            String temp = dt.Rows[i][0].ToString().Trim();
+                            importIDList.Add(temp);
+                        }
+                        listBoxImportID.DataSource = importIDList;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No Data", "Warning");
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                MessageBox.Show(temp);
+            }
+        }
+        private void btnNewImport_Click(object sender, EventArgs e)
+        {
+            frmCreateImport f = new frmCreateImport();
+            f.ShowDialog();
+        }
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            this.frmImport_Load(null, EventArgs.Empty);
         }
     }
 }
