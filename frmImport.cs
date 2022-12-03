@@ -30,6 +30,7 @@ namespace Finals_Project
         {
             txtAccount.Enabled = false;
             txtImportID.Enabled = false;
+            txtTotal.Enabled = false;
             dateTimePickerImportCreated.Enabled = false;
         }
         public String getSessionUserDataFromProgram()
@@ -103,9 +104,71 @@ namespace Finals_Project
                 MessageBox.Show(ex.Message);
             }
         }
-        public void 
-        public void getDetailDataFromImportID() { 
+        public void getDataFromImportID()
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection(Program.strConn);
+                conn.Open();
 
+                String sSQL = "select importID, importTotalPrice, importCreated, accountID from Import where importID = @importID";
+                SqlCommand cmd = new SqlCommand(sSQL, conn);
+                cmd.Parameters.AddWithValue("@importID", listBoxImportID.SelectedValue.ToString().Trim());
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    txtImportID.Text = dt.Rows[0][0].ToString().Trim();
+                    txtTotal.Text = dt.Rows[0][1].ToString().Trim();
+                    dateTimePickerImportCreated.Text = dt.Rows[0][2].ToString().Trim();
+                    txtAccount.Text = dt.Rows[0][3].ToString().Trim();
+                }
+                else
+                {
+                    MessageBox.Show("No Data", "Warning");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        public void getDetailDataFromImportID() 
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection(Program.strConn);
+                conn.Open();
+
+                String sSQL = "select * from ImportDetail where importID = @importID";
+                SqlCommand cmd = new SqlCommand(sSQL, conn);
+                cmd.Parameters.AddWithValue("@importID", listBoxImportID.SelectedValue.ToString().Trim());
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    dataGridViewImportDetail.DataSource = dt;
+                }
+                else
+                {
+                    MessageBox.Show("No Data", "Warning");
+                }
+            }   
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void listBoxImportID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            getDataFromImportID();
+            getDetailDataFromImportID();
         }
     }
 }

@@ -33,14 +33,16 @@
             this.lblAccountImport = new System.Windows.Forms.Label();
             this.lblImportID = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblDisplay = new System.Windows.Forms.Label();
+            this.lblTimeCreated = new System.Windows.Forms.Label();
+            this.txtImportID = new System.Windows.Forms.TextBox();
+            this.txtAccount = new System.Windows.Forms.TextBox();
             this.dateTimePickerImportCreated = new System.Windows.Forms.DateTimePicker();
             this.lblImport = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.txtImportID = new System.Windows.Forms.TextBox();
-            this.txtAccount = new System.Windows.Forms.TextBox();
-            this.lblTimeCreated = new System.Windows.Forms.Label();
-            this.lblDisplay = new System.Windows.Forms.Label();
+            this.txtTotal = new System.Windows.Forms.TextBox();
+            this.lblTotal = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImportDetail)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -52,16 +54,18 @@
             this.listBoxImportID.Name = "listBoxImportID";
             this.listBoxImportID.Size = new System.Drawing.Size(207, 342);
             this.listBoxImportID.TabIndex = 0;
+            this.listBoxImportID.SelectedIndexChanged += new System.EventHandler(this.listBoxImportID_SelectedIndexChanged);
             // 
             // dataGridViewImportDetail
             // 
             this.dataGridViewImportDetail.AllowUserToAddRows = false;
             this.dataGridViewImportDetail.AllowUserToDeleteRows = false;
             this.dataGridViewImportDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewImportDetail.Location = new System.Drawing.Point(12, 179);
+            this.dataGridViewImportDetail.Location = new System.Drawing.Point(12, 225);
             this.dataGridViewImportDetail.Name = "dataGridViewImportDetail";
             this.dataGridViewImportDetail.ReadOnly = true;
-            this.dataGridViewImportDetail.Size = new System.Drawing.Size(546, 212);
+            this.dataGridViewImportDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewImportDetail.Size = new System.Drawing.Size(546, 166);
             this.dataGridViewImportDetail.TabIndex = 1;
             // 
             // lblAccountImport
@@ -85,6 +89,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.Controls.Add(this.txtTotal);
+            this.panel1.Controls.Add(this.lblTotal);
             this.panel1.Controls.Add(this.lblDisplay);
             this.panel1.Controls.Add(this.lblTimeCreated);
             this.panel1.Controls.Add(this.txtImportID);
@@ -94,13 +100,47 @@
             this.panel1.Controls.Add(this.lblImportID);
             this.panel1.Location = new System.Drawing.Point(288, 49);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(270, 118);
+            this.panel1.Size = new System.Drawing.Size(270, 148);
             this.panel1.TabIndex = 4;
+            // 
+            // lblDisplay
+            // 
+            this.lblDisplay.AutoSize = true;
+            this.lblDisplay.BackColor = System.Drawing.Color.AliceBlue;
+            this.lblDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDisplay.Location = new System.Drawing.Point(14, 5);
+            this.lblDisplay.Name = "lblDisplay";
+            this.lblDisplay.Size = new System.Drawing.Size(59, 13);
+            this.lblDisplay.TabIndex = 9;
+            this.lblDisplay.Text = "DISPLAY";
+            // 
+            // lblTimeCreated
+            // 
+            this.lblTimeCreated.AutoSize = true;
+            this.lblTimeCreated.Location = new System.Drawing.Point(14, 115);
+            this.lblTimeCreated.Name = "lblTimeCreated";
+            this.lblTimeCreated.Size = new System.Drawing.Size(73, 13);
+            this.lblTimeCreated.TabIndex = 11;
+            this.lblTimeCreated.Text = "Time Created:";
+            // 
+            // txtImportID
+            // 
+            this.txtImportID.Location = new System.Drawing.Point(101, 54);
+            this.txtImportID.Name = "txtImportID";
+            this.txtImportID.Size = new System.Drawing.Size(149, 20);
+            this.txtImportID.TabIndex = 9;
+            // 
+            // txtAccount
+            // 
+            this.txtAccount.Location = new System.Drawing.Point(101, 21);
+            this.txtAccount.Name = "txtAccount";
+            this.txtAccount.Size = new System.Drawing.Size(149, 20);
+            this.txtAccount.TabIndex = 10;
             // 
             // dateTimePickerImportCreated
             // 
             this.dateTimePickerImportCreated.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerImportCreated.Location = new System.Drawing.Point(101, 86);
+            this.dateTimePickerImportCreated.Location = new System.Drawing.Point(101, 115);
             this.dateTimePickerImportCreated.Name = "dateTimePickerImportCreated";
             this.dateTimePickerImportCreated.Size = new System.Drawing.Size(149, 20);
             this.dateTimePickerImportCreated.TabIndex = 5;
@@ -110,7 +150,7 @@
             this.lblImport.AutoSize = true;
             this.lblImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblImport.ForeColor = System.Drawing.Color.SteelBlue;
-            this.lblImport.Location = new System.Drawing.Point(271, 12);
+            this.lblImport.Location = new System.Drawing.Point(271, 8);
             this.lblImport.Name = "lblImport";
             this.lblImport.Size = new System.Drawing.Size(278, 31);
             this.lblImport.TabIndex = 6;
@@ -134,39 +174,21 @@
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // txtImportID
+            // txtTotal
             // 
-            this.txtImportID.Location = new System.Drawing.Point(101, 54);
-            this.txtImportID.Name = "txtImportID";
-            this.txtImportID.Size = new System.Drawing.Size(149, 20);
-            this.txtImportID.TabIndex = 9;
+            this.txtTotal.Location = new System.Drawing.Point(101, 85);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.Size = new System.Drawing.Size(149, 20);
+            this.txtTotal.TabIndex = 13;
             // 
-            // txtAccount
+            // lblTotal
             // 
-            this.txtAccount.Location = new System.Drawing.Point(101, 21);
-            this.txtAccount.Name = "txtAccount";
-            this.txtAccount.Size = new System.Drawing.Size(149, 20);
-            this.txtAccount.TabIndex = 10;
-            // 
-            // lblTimeCreated
-            // 
-            this.lblTimeCreated.AutoSize = true;
-            this.lblTimeCreated.Location = new System.Drawing.Point(14, 86);
-            this.lblTimeCreated.Name = "lblTimeCreated";
-            this.lblTimeCreated.Size = new System.Drawing.Size(73, 13);
-            this.lblTimeCreated.TabIndex = 11;
-            this.lblTimeCreated.Text = "Time Created:";
-            // 
-            // lblDisplay
-            // 
-            this.lblDisplay.AutoSize = true;
-            this.lblDisplay.BackColor = System.Drawing.Color.AliceBlue;
-            this.lblDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDisplay.Location = new System.Drawing.Point(14, 5);
-            this.lblDisplay.Name = "lblDisplay";
-            this.lblDisplay.Size = new System.Drawing.Size(59, 13);
-            this.lblDisplay.TabIndex = 9;
-            this.lblDisplay.Text = "DISPLAY";
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(14, 85);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(31, 13);
+            this.lblTotal.TabIndex = 12;
+            this.lblTotal.Text = "Total";
             // 
             // frmImport
             // 
@@ -206,5 +228,7 @@
         private System.Windows.Forms.TextBox txtImportID;
         private System.Windows.Forms.Label lblTimeCreated;
         private System.Windows.Forms.Label lblDisplay;
+        private System.Windows.Forms.TextBox txtTotal;
+        private System.Windows.Forms.Label lblTotal;
     }
 }
