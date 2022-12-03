@@ -213,6 +213,7 @@
             this.btnPrint.TabIndex = 14;
             this.btnPrint.Text = "Print";
             this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnRefresh
             // 
@@ -238,6 +239,7 @@
             this.Controls.Add(this.dataGridViewImportDetail);
             this.Controls.Add(this.listBoxImportID);
             this.Name = "frmImport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmImport";
             this.Load += new System.EventHandler(this.frmImport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImportDetail)).EndInit();

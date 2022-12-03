@@ -15,6 +15,8 @@ namespace Finals_Project
     {
         public String sessionAccount = "";
         public String sessAccountPhone = "";
+        DataTable dtGlobal = new DataTable();
+        String totalGlobal = "";
         public frmImport()
         {
             InitializeComponent();
@@ -144,7 +146,7 @@ namespace Finals_Project
                 SqlConnection conn = new SqlConnection(Program.strConn);
                 conn.Open();
 
-                String sSQL = "select * from ImportDetail where importID = @importID";
+                String sSQL = "select productID, productName, productPrice, productQuantity, productOrigin from ImportDetail where importID = @importID";
                 SqlCommand cmd = new SqlCommand(sSQL, conn);
                 cmd.Parameters.AddWithValue("@importID", listBoxImportID.SelectedValue.ToString().Trim());
 
@@ -155,6 +157,8 @@ namespace Finals_Project
                 if (dt.Rows.Count > 0)
                 {
                     dataGridViewImportDetail.DataSource = dt;
+                    dtGlobal = dt;
+                    totalGlobal = dt.Rows.Count.ToString().Trim();
                 }
                 else
                 {
@@ -181,36 +185,30 @@ namespace Finals_Project
             else
             {
                 String temp = listBoxImportID.Items[listBoxImportID.SelectedIndex].ToString();
-                try
-                {
-                    SqlConnection conn = new SqlConnection(Program.strConn);
-                    conn.Open();
+                //try
+                //{
+                //    SqlConnection conn = new SqlConnection(Program.strConn);
+                //    conn.Open();
 
-                    String sSQL = "select importID from Import";
-                    SqlCommand cmd = new SqlCommand(sSQL, conn);
+                //    String sSQL = "delete from ";
+                //    SqlCommand cmd = new SqlCommand(sSQL, conn);
+                //    cmd.Parameters.AddWithValue("")
 
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                //    int i = cmd.ExecuteNonQuery();
+                //    if (i != 0)
+                //    {
+                //        //MessageBox.Show("Saved");
+                //    }
+                //    else
+                //    {
+                //        MessageBox.Show("Error");
+                //    }
+                //    conn.Close();
+                //}
+                //catch (Exception ex)
+                //{
 
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    if (dt.Rows.Count > 0)
-                    {
-                        for (int i = 0; i < dt.Rows.Count; i++)
-                        {
-                            String temp = dt.Rows[i][0].ToString().Trim();
-                            importIDList.Add(temp);
-                        }
-                        listBoxImportID.DataSource = importIDList;
-                    }
-                    else
-                    {
-                        MessageBox.Show("No Data", "Warning");
-                    }
-                }
-                catch (Exception ex)
-                {
-
-                }
+                //}
                 MessageBox.Show(temp);
             }
         }
@@ -222,6 +220,13 @@ namespace Finals_Project
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             this.frmImport_Load(null, EventArgs.Empty);
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show(dtGlobal.Rows.Count.ToString());
+            frmPrint f = new frmPrint(dtGlobal, txtTotal.Text.ToString().Trim(), totalGlobal, txtImportID.Text, dateTimePickerImportCreated.Text, txtAccount.Text);
+            f.ShowDialog();
         }
     }
 }
