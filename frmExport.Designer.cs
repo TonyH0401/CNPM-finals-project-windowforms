@@ -30,25 +30,25 @@
         {
             this.lblExport = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtbxPaymentMethod = new System.Windows.Forms.TextBox();
+            this.txtbxExportStatus = new System.Windows.Forms.TextBox();
+            this.txtTotal = new System.Windows.Forms.TextBox();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.lblPaymentMethod = new System.Windows.Forms.Label();
+            this.lblExportStatus = new System.Windows.Forms.Label();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnConfirm = new System.Windows.Forms.Button();
-            this.txtTotal = new System.Windows.Forms.TextBox();
             this.btnNewExport = new System.Windows.Forms.Button();
-            this.lblTotal = new System.Windows.Forms.Label();
+            this.txtbxStoreID = new System.Windows.Forms.TextBox();
             this.lblDisplayExport = new System.Windows.Forms.Label();
             this.lblTimeCreated = new System.Windows.Forms.Label();
+            this.lblStoreID = new System.Windows.Forms.Label();
             this.txtExportID = new System.Windows.Forms.TextBox();
             this.txtAccount = new System.Windows.Forms.TextBox();
             this.dateTimePickerExportCreated = new System.Windows.Forms.DateTimePicker();
             this.lblAccountExport = new System.Windows.Forms.Label();
             this.lblExportID = new System.Windows.Forms.Label();
-            this.txtbxPaymentMethod = new System.Windows.Forms.TextBox();
-            this.lblPaymentMethod = new System.Windows.Forms.Label();
-            this.txtbxStoreID = new System.Windows.Forms.TextBox();
-            this.lblStoreID = new System.Windows.Forms.Label();
-            this.txtbxExportStatus = new System.Windows.Forms.TextBox();
-            this.lblExportStatus = new System.Windows.Forms.Label();
             this.listBoxExportID = new System.Windows.Forms.ListBox();
             this.dataGridViewExportDetail = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
@@ -93,6 +93,27 @@
             this.panel1.Size = new System.Drawing.Size(597, 197);
             this.panel1.TabIndex = 8;
             // 
+            // txtbxPaymentMethod
+            // 
+            this.txtbxPaymentMethod.Location = new System.Drawing.Point(398, 71);
+            this.txtbxPaymentMethod.Name = "txtbxPaymentMethod";
+            this.txtbxPaymentMethod.Size = new System.Drawing.Size(149, 20);
+            this.txtbxPaymentMethod.TabIndex = 19;
+            // 
+            // txtbxExportStatus
+            // 
+            this.txtbxExportStatus.Location = new System.Drawing.Point(107, 130);
+            this.txtbxExportStatus.Name = "txtbxExportStatus";
+            this.txtbxExportStatus.Size = new System.Drawing.Size(81, 20);
+            this.txtbxExportStatus.TabIndex = 21;
+            // 
+            // txtTotal
+            // 
+            this.txtTotal.Location = new System.Drawing.Point(398, 102);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.Size = new System.Drawing.Size(149, 20);
+            this.txtTotal.TabIndex = 13;
+            // 
             // btnRefresh
             // 
             this.btnRefresh.BackColor = System.Drawing.Color.SteelBlue;
@@ -104,6 +125,36 @@
             this.btnRefresh.TabIndex = 15;
             this.btnRefresh.Text = "&Refresh";
             this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Location = new System.Drawing.Point(303, 105);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(36, 13);
+            this.lblTotal.TabIndex = 12;
+            this.lblTotal.Text = "Total";
+            // 
+            // lblPaymentMethod
+            // 
+            this.lblPaymentMethod.AutoSize = true;
+            this.lblPaymentMethod.Location = new System.Drawing.Point(302, 76);
+            this.lblPaymentMethod.Name = "lblPaymentMethod";
+            this.lblPaymentMethod.Size = new System.Drawing.Size(90, 13);
+            this.lblPaymentMethod.TabIndex = 18;
+            this.lblPaymentMethod.Text = "Payment Method:";
+            // 
+            // lblExportStatus
+            // 
+            this.lblExportStatus.AutoSize = true;
+            this.lblExportStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExportStatus.Location = new System.Drawing.Point(14, 133);
+            this.lblExportStatus.Name = "lblExportStatus";
+            this.lblExportStatus.Size = new System.Drawing.Size(87, 13);
+            this.lblExportStatus.TabIndex = 20;
+            this.lblExportStatus.Text = "Export Status:";
             // 
             // btnPrint
             // 
@@ -125,13 +176,7 @@
             this.btnConfirm.TabIndex = 8;
             this.btnConfirm.Text = "Confirm";
             this.btnConfirm.UseVisualStyleBackColor = false;
-            // 
-            // txtTotal
-            // 
-            this.txtTotal.Location = new System.Drawing.Point(398, 102);
-            this.txtTotal.Name = "txtTotal";
-            this.txtTotal.Size = new System.Drawing.Size(149, 20);
-            this.txtTotal.TabIndex = 13;
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // btnNewExport
             // 
@@ -143,16 +188,14 @@
             this.btnNewExport.TabIndex = 7;
             this.btnNewExport.Text = "New Export";
             this.btnNewExport.UseVisualStyleBackColor = false;
+            this.btnNewExport.Click += new System.EventHandler(this.btnNewExport_Click);
             // 
-            // lblTotal
+            // txtbxStoreID
             // 
-            this.lblTotal.AutoSize = true;
-            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(303, 105);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(36, 13);
-            this.lblTotal.TabIndex = 12;
-            this.lblTotal.Text = "Total";
+            this.txtbxStoreID.Location = new System.Drawing.Point(107, 102);
+            this.txtbxStoreID.Name = "txtbxStoreID";
+            this.txtbxStoreID.Size = new System.Drawing.Size(149, 20);
+            this.txtbxStoreID.TabIndex = 17;
             // 
             // lblDisplayExport
             // 
@@ -173,6 +216,15 @@
             this.lblTimeCreated.Size = new System.Drawing.Size(73, 13);
             this.lblTimeCreated.TabIndex = 11;
             this.lblTimeCreated.Text = "Time Created:";
+            // 
+            // lblStoreID
+            // 
+            this.lblStoreID.AutoSize = true;
+            this.lblStoreID.Location = new System.Drawing.Point(14, 105);
+            this.lblStoreID.Name = "lblStoreID";
+            this.lblStoreID.Size = new System.Drawing.Size(49, 13);
+            this.lblStoreID.TabIndex = 16;
+            this.lblStoreID.Text = "Store ID:";
             // 
             // txtExportID
             // 
@@ -214,55 +266,6 @@
             this.lblExportID.TabIndex = 3;
             this.lblExportID.Text = "Export ID:";
             // 
-            // txtbxPaymentMethod
-            // 
-            this.txtbxPaymentMethod.Location = new System.Drawing.Point(398, 71);
-            this.txtbxPaymentMethod.Name = "txtbxPaymentMethod";
-            this.txtbxPaymentMethod.Size = new System.Drawing.Size(149, 20);
-            this.txtbxPaymentMethod.TabIndex = 19;
-            // 
-            // lblPaymentMethod
-            // 
-            this.lblPaymentMethod.AutoSize = true;
-            this.lblPaymentMethod.Location = new System.Drawing.Point(302, 76);
-            this.lblPaymentMethod.Name = "lblPaymentMethod";
-            this.lblPaymentMethod.Size = new System.Drawing.Size(90, 13);
-            this.lblPaymentMethod.TabIndex = 18;
-            this.lblPaymentMethod.Text = "Payment Method:";
-            // 
-            // txtbxStoreID
-            // 
-            this.txtbxStoreID.Location = new System.Drawing.Point(107, 102);
-            this.txtbxStoreID.Name = "txtbxStoreID";
-            this.txtbxStoreID.Size = new System.Drawing.Size(149, 20);
-            this.txtbxStoreID.TabIndex = 17;
-            // 
-            // lblStoreID
-            // 
-            this.lblStoreID.AutoSize = true;
-            this.lblStoreID.Location = new System.Drawing.Point(14, 105);
-            this.lblStoreID.Name = "lblStoreID";
-            this.lblStoreID.Size = new System.Drawing.Size(49, 13);
-            this.lblStoreID.TabIndex = 16;
-            this.lblStoreID.Text = "Store ID:";
-            // 
-            // txtbxExportStatus
-            // 
-            this.txtbxExportStatus.Location = new System.Drawing.Point(107, 130);
-            this.txtbxExportStatus.Name = "txtbxExportStatus";
-            this.txtbxExportStatus.Size = new System.Drawing.Size(81, 20);
-            this.txtbxExportStatus.TabIndex = 21;
-            // 
-            // lblExportStatus
-            // 
-            this.lblExportStatus.AutoSize = true;
-            this.lblExportStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportStatus.Location = new System.Drawing.Point(14, 133);
-            this.lblExportStatus.Name = "lblExportStatus";
-            this.lblExportStatus.Size = new System.Drawing.Size(87, 13);
-            this.lblExportStatus.TabIndex = 20;
-            this.lblExportStatus.Text = "Export Status:";
-            // 
             // listBoxExportID
             // 
             this.listBoxExportID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -272,6 +275,7 @@
             this.listBoxExportID.Name = "listBoxExportID";
             this.listBoxExportID.Size = new System.Drawing.Size(153, 379);
             this.listBoxExportID.TabIndex = 9;
+            this.listBoxExportID.SelectedIndexChanged += new System.EventHandler(this.listBoxExportID_SelectedIndexChanged);
             // 
             // dataGridViewExportDetail
             // 
