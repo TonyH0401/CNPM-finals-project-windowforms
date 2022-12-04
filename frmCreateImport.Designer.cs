@@ -456,6 +456,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "frmCreateImport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCreateImport";
             this.Load += new System.EventHandler(this.frmCreateImport_Load);
             this.panel1.ResumeLayout(false);

@@ -4,8 +4,10 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,6 +19,8 @@ namespace Finals_Project
     {
         //the quantity after this will be saved into the database
         Dictionary<string, int> initialProductQuantity = new Dictionary<string, int>();
+        private String sessionAccountID = "";
+        //private double storeTax = -1;
         public frmAddProductExport()
         {
             InitializeComponent();
@@ -24,6 +28,20 @@ namespace Finals_Project
 
         private void frmAddProductImport_Load(object sender, EventArgs e)
         {
+            //initiate components (disable txtbx and cbbx), pre-load datagridview with header
+            initiateComponents();
+            initiateDataGridView();
+            //load cbbxStoreName, getInitialProductQuantity
+            initiateComboBoxStoreName();
+            getProductInitialQuantity(); //need this first to load the product initial quantity
+            initiateComboBoxProduct();
+
+            initiateComboBoxPaymentMethod();
+        }
+
+        public void initiateComponents()
+        {
+            //product display panel
             txtbxProductID.ReadOnly = true;
             txtbxProductPrice.ReadOnly = true;
             txtbxProductQuantity.ReadOnly = true;
@@ -32,45 +50,133 @@ namespace Finals_Project
             txtbxProductPrice.BackColor = Color.White;
             txtbxProductQuantity.BackColor = Color.White;
             txtbxOrigin.BackColor = Color.White;
-
+            cbbxProductID.Enabled = false;
+            //store display panel
             txtbxStoreID.ReadOnly = true;
             txtbxStoreLocation.ReadOnly = true;
             txtbxSessionUser.ReadOnly = true;
             txtbxStoreID.BackColor = Color.White;
             txtbxStoreLocation.BackColor = Color.White;
             txtbxSessionUser.BackColor = Color.White;
-            txtbxSessionUser.Text = (!Program.sessionAccount.Trim().Equals("")) ? Program.sessionAccount.Trim() : "admin";
-
+            getSessionAccountData();
+            txtbxSessionUser.Text = sessionAccountID;
+            //disable button
             btnAdd.Enabled = false;
-            btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
-
-            this.ActiveControl = txtbxQuantityToImport;
-
-            initiateLoadProductQuantity();
-            initiateDataGridView();
-            initiateComboBox();
-            initiateComboBoxStoreName();
-
+            //
+            txtbxQuantityToImport.Enabled = false;
+            //total cost
+            txtbxTotalCost.ReadOnly = true;
+            //cbbx paymentmethod
+            cbbxPaymentMethod.Enabled = false;
+            //button create export
+            btnCreateExport.Enabled = false;
         }
+        public void initiateComboBoxPaymentMethod()
+        {
+            SqlConnection conn = new SqlConnection(Program.strConn);
+            conn.Open();
+            String sSQL = "select * from PaymentMethod";
+            SqlCommand cmd = new SqlCommand(sSQL, conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                cbbxPaymentMethod.DataSource = dt;
+                cbbxPaymentMethod.DisplayMember = "paymentName";
+                cbbxPaymentMethod.ValueMember = "paymentID";
+            }
+            else
+            {
+                MessageBox.Show("No data", "Warning");
+            }
+        }
+        //done
+        public String getSesstionAccountFromProgram()
+        {
+            String value0 = Program.sessionAccount;
+            if (value0.Length == 0)
+            {
+                return "admin";
+            }
+            else
+            {
+                return value0;
+            }
+        }
+        //done
+        public void getSessionAccountData()
+        {
+            SqlConnection conn = new SqlConnection(Program.strConn);
+            conn.Open();
 
+            String sSQL = "select accountID from Account where accountID=@accountID";
+            SqlCommand cmd = new SqlCommand(sSQL, conn);
+            cmd.Parameters.AddWithValue("@accountID", getSesstionAccountFromProgram().Trim());
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                String sessionID = (String)dt.Rows[0][0];
+                sessionAccountID = sessionID;
+            }
+            else
+            {
+                MessageBox.Show("Invalid Login. Please check Username or Password!", "Warning");
+            }
+        }
+        //done
+        public double getStoreTax(String storeID)
+        {
+            double result = -1;
+            SqlConnection conn = new SqlConnection(Program.strConn);
+            conn.Open();
+            String sSQL = "select taxValue from Store where storeID=@storeID";
+            SqlCommand cmd = new SqlCommand(sSQL, conn);
+            cmd.Parameters.AddWithValue("@storeID", storeID);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                String temp = dt.Rows[0][0].ToString();
+                result = double.Parse(temp, CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                MessageBox.Show("No store", "Warning");
+            }
+            return result;
+        }
+        //done
+        public double calculateTotalCost(String storeID)
+        {
+            double storeTax = getStoreTax(storeID);
+            double sum = 0;
+            foreach(DataGridViewRow row in dataGridViewAddedProduct.Rows)
+            {
+                sum = sum + Int32.Parse(row.Cells[4].Value.ToString().Trim());
+            }
+            return sum - (sum * storeTax / 100);
+        }
+        //done
         private void initiateDataGridView()
         {
-            dataGridViewAddedProduct.ColumnCount = 8;
+            dataGridViewAddedProduct.ColumnCount = 6;
             dataGridViewAddedProduct.Columns[0].Name = "ProductID";
             dataGridViewAddedProduct.Columns[1].Name = "Product Name";
-            dataGridViewAddedProduct.Columns[2].Name = "Product Price";
+            dataGridViewAddedProduct.Columns[2].Name = "Price";
             dataGridViewAddedProduct.Columns[3].Name = "Quantity";
+            dataGridViewAddedProduct.Columns[5].Name = "Origin";
             dataGridViewAddedProduct.Columns[4].Name = "Total Price";
-            dataGridViewAddedProduct.Columns[5].Name = "Store ID";
-            dataGridViewAddedProduct.Columns[6].Name = "Store Name";
-            dataGridViewAddedProduct.Columns[7].Name = "Store location";
-            dataGridViewAddedProduct.Columns[6].Visible = false;
-            dataGridViewAddedProduct.Columns[7].Visible = false;
-
         }
-
-        private void initiateComboBox()
+        //done
+        private void initiateComboBoxProduct()
         {
             SqlConnection conn = new SqlConnection(Program.strConn);
             conn.Open();
@@ -92,7 +198,7 @@ namespace Finals_Project
                 MessageBox.Show("No data", "Warning");
             }
         }
-
+        //done
         private void initiaProductInformation()
         {
             SqlConnection conn = new SqlConnection(Program.strConn);
@@ -120,21 +226,22 @@ namespace Finals_Project
                 //MessageBox.Show("No data", "Warning");
             }
         }
-
+        //done
         private void cbbxProductID_SelectedIndexChanged(object sender, EventArgs e)
         {
             initiaProductInformation();
+            //enalbe Quantity to Import
+            txtbxQuantityToImport.Enabled = true;
+            this.ActiveControl = txtbxQuantityToImport;
         }
-
+        //done
         private void initiateComboBoxStoreName()
         {
             SqlConnection conn = new SqlConnection(Program.strConn);
             conn.Open();
-
             String sSQL = "select * from Store";
             SqlCommand cmd = new SqlCommand(sSQL, conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
-
             DataTable dt = new DataTable();
             da.Fill(dt);
             if (dt.Rows.Count > 0)
@@ -148,7 +255,7 @@ namespace Finals_Project
                 MessageBox.Show("No data", "Warning");
             }
         }
-
+        //done
         private void initiaStoreInformation()
         {
             SqlConnection conn = new SqlConnection(Program.strConn);
@@ -166,20 +273,23 @@ namespace Finals_Project
             {
                 txtbxStoreID.Text = (String)dt.Rows[0][0];
                 txtbxStoreLocation.Text = (String) dt.Rows[0][2].ToString().Trim();
+                //enable add button
                 btnAdd.Enabled = (txtbxStoreID.Text.Equals("") == true) ? false : true;
+                //enable cbbxProduct
+                cbbxProductID.Enabled = true;
             }
             else
             {
                 //MessageBox.Show("No data", "Warning");
             }
         }
-
+        //done
         private void cbbxStoreName_SelectedIndexChanged(object sender, EventArgs e)
         {
             initiaStoreInformation();
         }
-
-        private void initiateLoadProductQuantity()
+        //done
+        private void getProductInitialQuantity()
         {
             SqlConnection conn = new SqlConnection(Program.strConn);
             conn.Open();
@@ -202,8 +312,8 @@ namespace Finals_Project
             {
                 //MessageBox.Show("No data", "Warning");
             }
-
         }
+        //done
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if(((int) txtbxStoreID.Text.Length * (int) txtbxStoreID.Text.Length) == 0)
@@ -225,6 +335,11 @@ namespace Finals_Project
                         MessageBox.Show("Please enter a number", "Warning input type", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         txtbxQuantityToImport.Clear();
                     }
+                    else if(txtbxProductID.Text.Equals("") == true)
+                    {
+                        MessageBox.Show("Please select a product", "Warning input type", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtbxQuantityToImport.Clear();
+                    }
                     else
                     {
                         if((n <= 0) || n >= ((int)initialProductQuantity[txtbxProductID.Text]))
@@ -237,18 +352,18 @@ namespace Finals_Project
                             //remember to add a loop to iterate through
                             int rowIndex = -1;
                             String searchValuePROD = cbbxProductID.SelectedValue.ToString().Trim();
-                            String searchValueSTORE = cbbxStoreName.SelectedValue.ToString().Trim();
+                            //String searchValueSTORE = cbbxStoreName.SelectedValue.ToString().Trim();
                             bool foundProduct = false;
                             foreach (DataGridViewRow cRow in dataGridViewAddedProduct.Rows)
                             {
-                                if (cRow.Cells[0].Value.ToString().Equals(searchValuePROD) && cRow.Cells[5].Value.ToString().Equals(searchValueSTORE))
+                                if (cRow.Cells[0].Value.ToString().Equals(searchValuePROD))
                                 {
                                     cRow.Cells[3].Value = Int32.Parse(cRow.Cells[3].Value.ToString().Trim()) + Int32.Parse(txtbxQuantityToImport.Text.ToString().Trim());
                                     cRow.Cells[4].Value = Int32.Parse(cRow.Cells[2].Value.ToString().Trim()) * Int32.Parse(cRow.Cells[3].Value.ToString().Trim());
-                                    //update quantity of SERVER VIA DICTIONARY after import
+                                    //update initial product quantity, this will be uploaded to SERVER
                                     int temp_value = initialProductQuantity[cbbxProductID.SelectedValue.ToString().Trim()] - Int32.Parse(txtbxQuantityToImport.Text);
                                     initialProductQuantity[cbbxProductID.SelectedValue.ToString().Trim()] = temp_value;
-                                    //update quantity of DISPLAYED TEXT after import
+                                    //update initial product quantity on DISPLAY
                                     txtbxProductQuantity.Text = initialProductQuantity[cbbxProductID.SelectedValue.ToString().Trim()].ToString();
                                     rowIndex = cRow.Index;
                                     foundProduct = true;
@@ -257,17 +372,22 @@ namespace Finals_Project
                             }
                             if(foundProduct == false)
                             {
-                                string[] row = new string[] { txtbxProductID.Text, cbbxProductID.Text.ToString(), txtbxProductPrice.Text, txtbxQuantityToImport.Text, (Int32.Parse(txtbxProductPrice.Text.ToString().Trim()) * Int32.Parse(txtbxQuantityToImport.Text.ToString().Trim())).ToString().Trim(), cbbxStoreName.SelectedValue.ToString().Trim(), cbbxStoreName.Text.ToString().Trim(), txtbxStoreLocation.Text.ToString().Trim()};
-                                //update quantity of SERVER VIA DICTIONARY after import
+                                //string[] row = new string[] { txtbxProductID.Text, cbbxProductID.Text.ToString(), txtbxProductPrice.Text, txtbxQuantityToImport.Text, (Int32.Parse(txtbxProductPrice.Text.ToString().Trim()) * Int32.Parse(txtbxQuantityToImport.Text.ToString().Trim())).ToString().Trim(), cbbxStoreName.SelectedValue.ToString().Trim(), cbbxStoreName.Text.ToString().Trim(), txtbxStoreLocation.Text.ToString().Trim()};
+                                string[] row = new string[] { txtbxProductID.Text, cbbxProductID.Text.ToString(), txtbxProductPrice.Text, txtbxQuantityToImport.Text, (Int32.Parse(txtbxProductPrice.Text.ToString().Trim()) * Int32.Parse(txtbxQuantityToImport.Text.ToString().Trim())).ToString().Trim(), txtbxOrigin.Text.ToString().Trim()};
+                                //update initial product quantity, this will be uploaded to SERVER
                                 int temp_value = initialProductQuantity[cbbxProductID.SelectedValue.ToString().Trim()] - Int32.Parse(txtbxQuantityToImport.Text);
                                 initialProductQuantity[cbbxProductID.SelectedValue.ToString().Trim()] = temp_value;
-                                //update quantity of DISPLAYED TEXT after import
+                                //update initial product quantity on DISPLAY
                                 txtbxProductQuantity.Text = initialProductQuantity[cbbxProductID.SelectedValue.ToString().Trim()].ToString();
                                 dataGridViewAddedProduct.Rows.Add(row);
                                 //MessageBox.Show(initialProductQuantity[cbbxProductID.SelectedValue.ToString().Trim()].ToString() + "; " + cbbxProductID.SelectedValue.ToString().Trim());
                             }
+                            //
+                            txtbxTotalCost.Text = calculateTotalCost(txtbxStoreID.Text.ToString().Trim()).ToString().Trim();
                             MessageBox.Show("Successfully Added", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             txtbxQuantityToImport.Clear();
+                            cbbxPaymentMethod.Enabled = true;
+                            btnCreateExport.Enabled = true;
                         }
                     }                   
                 }
@@ -277,63 +397,218 @@ namespace Finals_Project
                 //also save current product quantity after. when delete remember to refill product quantity
             }
         }
-
+        //done
         private void dataGridViewAddedProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            //enable delete button
             btnDelete.Enabled = true;
-
+            //load product information from datagridview to product display panel
             foreach (DataGridViewRow row in dataGridViewAddedProduct.SelectedRows)
             {
                 cbbxProductID.Text = row.Cells[1].Value.ToString();
                 txtbxProductID.Text = row.Cells[0].Value.ToString();
                 txtbxProductPrice.Text = row.Cells[2].Value.ToString();
                 txtbxProductQuantity.Text = initialProductQuantity[txtbxProductID.Text.ToString().Trim()].ToString().Trim();
-
-                //cbbxStoreName
-                cbbxStoreName.Text = row.Cells[6].Value.ToString();
-                txtbxStoreID.Text = row.Cells[5].Value.ToString();
-                txtbxStoreLocation.Text = row.Cells[7].Value.ToString();
+                //load quantity need import from datagridview to txbx
                 txtbxQuantityToImport.Text = row.Cells[3].Value.ToString();
-
-
-
-                //dataGridViewAddedProduct.Rows.RemoveAt(row.Index);
-                ////update product quantity
-                //initialProductQuantity[row.Cells[0].Value.ToString().Trim()] = initialProductQuantity[txtbxProductID.Text.ToString().Trim()] + Int32.Parse(row.Cells[3].Value.ToString().Trim());
-                //MessageBox.Show(initialProductQuantity[row.Cells[0].Value.ToString().Trim()].ToString());
-
             }
         }
-
+        //done
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            foreach(DataGridViewRow cRow2 in dataGridViewAddedProduct.SelectedRows)
+            if(dataGridViewAddedProduct.Rows.Count == 0)
             {
-                initialProductQuantity[cbbxProductID.SelectedValue.ToString().Trim()] = initialProductQuantity[txtbxProductID.Text.ToString().Trim()] + Int32.Parse(txtbxQuantityToImport.Text.ToString().Trim());
-                txtbxProductQuantity.Text = initialProductQuantity[cbbxProductID.SelectedValue.ToString().Trim()].ToString().Trim();
-                //MessageBox.Show(cRow2.Cells[0].Value.ToString());
-                //remember to update the quantity 
+                MessageBox.Show("There are no products to delete", "Warning");
             }
-            
-            foreach (DataGridViewRow cRow in dataGridViewAddedProduct.SelectedRows)
+            else
             {
-                dataGridViewAddedProduct.Rows.RemoveAt(cRow.Index);
+                //there are a little bug is that if you continue to delete without select there will be error
+                //update product quantity SERVER
+                foreach (DataGridViewRow cRow2 in dataGridViewAddedProduct.SelectedRows)
+                {
+                    initialProductQuantity[cbbxProductID.SelectedValue.ToString().Trim()] = initialProductQuantity[txtbxProductID.Text.ToString().Trim()] + Int32.Parse(txtbxQuantityToImport.Text.ToString().Trim());
+                    txtbxProductQuantity.Text = initialProductQuantity[cbbxProductID.SelectedValue.ToString().Trim()].ToString().Trim();
+                }
+                //delete product from datagridview
+                foreach (DataGridViewRow cRow in dataGridViewAddedProduct.SelectedRows)
+                {
+                    dataGridViewAddedProduct.Rows.RemoveAt(cRow.Index);
+                }
+                MessageBox.Show("Deleted Product", "Warning");
+                txtbxQuantityToImport.Clear();
+                //re-calculate after deletion
+                txtbxTotalCost.Text = calculateTotalCost(txtbxStoreID.Text.ToString().Trim()).ToString().Trim();
             }
-
+            if (dataGridViewAddedProduct.Rows.Count == 0)
+            {
+                txtbxTotalCost.Clear();
+            }
+        }
+        
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            //clear all data
+            initialProductQuantity.Clear();
+            txtbxStoreID.Clear();
+            txtbxStoreLocation.Clear();
+            txtbxProductID.Clear();
+            txtbxProductPrice.Clear();
+            txtbxProductQuantity.Clear();
+            txtbxOrigin.Clear();
             txtbxQuantityToImport.Clear();
-
-            //initialProductQuantity[row.Cells[0].Value.ToString().Trim()] = initialProductQuantity[txtbxProductID.Text.ToString().Trim()] + Int32.Parse(row.Cells[3].Value.ToString().Trim());
-            //MessageBox.Show(initialProductQuantity[row.Cells[0].Value.ToString().Trim()].ToString());
-
-            //DataGridViewRow row = dataGridViewAddedProduct.SelectedRows;
-            //dataGridViewAddedProduct.Rows.RemoveAt(row.Index);
-            ////update product quantity
-
+            txtbxTotalCost.Clear();
+            this.dataGridViewAddedProduct.DataSource = null;
+            this.dataGridViewAddedProduct.Rows.Clear();
+            //re-load
+            this.frmAddProductImport_Load(null, EventArgs.Empty);
+        }
+        //done
+        public int getExportBillCounter()
+        {
+            SqlConnection conn = new SqlConnection(Program.strConn);
+            conn.Open();
+            String sSQL = "select exportID from Export";
+            SqlCommand cmd = new SqlCommand(sSQL, conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                return Int32.Parse(dt.Rows.Count.ToString().Trim());
+            }
+            else
+            {
+                return Int32.Parse(dt.Rows.Count.ToString().Trim());
+            }
+        }
+        //done
+        public String getExportBillID()
+        {
+            string exportBillCounter = (getExportBillCounter() + 1).ToString().Trim();
+            string dateTime = DateTime.Now.ToString("yyyy-MM-dd").Replace("-", "");
+            return "EXPRT"+ dateTime + exportBillCounter;
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        public void insertExportBill(String exportBillID, String paymentMethodID)
         {
+            String exportID = exportBillID;
+            String exportTotalProduct = dataGridViewAddedProduct.Rows.Count.ToString().Trim();
+            String exportTotalPrice = txtbxTotalCost.Text.ToString().Trim();
+            String exportCreated = DateTime.Now.ToString("yyyy-MM-dd").Trim();
+            String accountID = sessionAccountID;
+            int exportStatus = 0; //when create it is always 0, it is set as 1 by the accountant
+            String paymentID = paymentMethodID;
+            String storeID = txtbxStoreID.Text.ToString().Trim();
 
+            try
+            {
+                SqlConnection conn = new SqlConnection(Program.strConn);
+                conn.Open();
+                String sSQL = "insert into Export values (@exportID, @exportTotalProduct, @exportTotalPrice, @exportCreated, @exportStatus, @accountID, @paymentID, @storeID)";
+                SqlCommand cmd = new SqlCommand(sSQL, conn);
+                cmd.Parameters.AddWithValue("@exportID", exportID);
+                cmd.Parameters.AddWithValue("@exportTotalProduct", exportTotalProduct);
+                cmd.Parameters.AddWithValue("@exportTotalPrice", exportTotalPrice);
+                cmd.Parameters.AddWithValue("@exportCreated", exportCreated);
+                cmd.Parameters.AddWithValue("@exportStatus", exportStatus);
+                cmd.Parameters.AddWithValue("@accountID", accountID);
+                cmd.Parameters.AddWithValue("@paymentID", paymentID);
+                cmd.Parameters.AddWithValue("@storeID", storeID);
+
+                int i = cmd.ExecuteNonQuery();
+                if (i != 0)
+                {
+                    //MessageBox.Show("Saved");
+                }
+                else
+                {
+                    MessageBox.Show("Error");
+                }
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Some error occur: " + ex.Message + " - " + ex.Source);
+            }
+        }
+        public void insertExportBillDetail(String exportBillID)
+        {
+            foreach (DataGridViewRow row in dataGridViewAddedProduct.Rows)
+            {
+                String productID = row.Cells[0].Value.ToString().Trim();
+                String productName = row.Cells[1].Value.ToString().Trim();
+                String productPrice = row.Cells[2].Value.ToString().Trim();
+                String productQuantity = row.Cells[3].Value.ToString().Trim();
+                String productOrigin = row.Cells[5].Value.ToString().Trim();
+                try
+                {
+                    SqlConnection conn = new SqlConnection(Program.strConn);
+                    conn.Open();
+
+                    String sSQL = "insert into ExportDetail values (@importID, @productID, @productName, @productPrice, @productQuantity, @productOrigin)";
+                    SqlCommand cmd = new SqlCommand(sSQL, conn);
+                    cmd.Parameters.AddWithValue("@importID", exportBillID);
+                    cmd.Parameters.AddWithValue("@productID", productID);
+                    cmd.Parameters.AddWithValue("@productName", productName);
+                    cmd.Parameters.AddWithValue("@productPrice", productPrice);
+                    cmd.Parameters.AddWithValue("@productQuantity", productQuantity);
+                    cmd.Parameters.AddWithValue("@productOrigin", productOrigin);
+
+                    int i = cmd.ExecuteNonQuery();
+                    if (i != 0)
+                    {
+                        //MessageBox.Show("Saved");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error");
+                    }
+                    conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Some error occur: " + ex.Message + " - " + ex.Source);
+                }
+            }
+        }
+        private void btnCreateExport_Click(object sender, EventArgs e)
+        {
+            if(dataGridViewAddedProduct.Rows.Count == 0)
+            {
+                MessageBox.Show("Can not Export Bill because there are no product", "Warning");
+                btnCreateExport.Enabled = false;
+                txtbxTotalCost.Clear();
+            }
+            else
+            {
+                //String temp = "ID: " + getExportBillID() + ", Total Cost: " + txtbxTotalCost.Text.ToString().Trim() +", Method: " +paymentMethod;
+                //MessageBox.Show(temp);
+                String exportBillID = getExportBillID();
+                String paymentMethodID = cbbxPaymentMethod.SelectedValue.ToString();
+                DialogResult dt = MessageBox.Show("Do you want to Create Export Bill", "System Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dt == DialogResult.Yes)
+                {
+                    insertExportBill(exportBillID, paymentMethodID);
+                    insertExportBillDetail(exportBillID);
+
+                    MessageBox.Show("Created Export Bill: " + exportBillID + "", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //clear data not reload
+                    this.dataGridViewAddedProduct.DataSource = null;
+                    this.dataGridViewAddedProduct.Rows.Clear();
+                    txtbxTotalCost.Clear();
+                    txtbxQuantityToImport.Clear();
+                    cbbxPaymentMethod.SelectedIndex = 0;
+                }
+            }
+        }
+        //done
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            DialogResult dt = MessageBox.Show("Do you want to Exit", "System Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dt == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
     }
 }

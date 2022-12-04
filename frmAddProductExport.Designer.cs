@@ -43,8 +43,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblDisplay = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnReset = new System.Windows.Forms.Button();
             this.lblADDPROD = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblSessionUser = new System.Windows.Forms.Label();
@@ -58,9 +57,19 @@
             this.txtbxStoreLocation = new System.Windows.Forms.TextBox();
             this.lblStoreID = new System.Windows.Forms.Label();
             this.txtbxQuantityToImport = new System.Windows.Forms.TextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.txtbxTotalCost = new System.Windows.Forms.TextBox();
+            this.cbbxPaymentMethod = new System.Windows.Forms.ComboBox();
+            this.lblPaymentMethod = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.btnCreateExport = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAddedProduct)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbbxProductID
@@ -151,24 +160,23 @@
             this.dataGridViewAddedProduct.AllowUserToAddRows = false;
             this.dataGridViewAddedProduct.AllowUserToDeleteRows = false;
             this.dataGridViewAddedProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewAddedProduct.Location = new System.Drawing.Point(359, 8);
+            this.dataGridViewAddedProduct.Location = new System.Drawing.Point(365, 8);
             this.dataGridViewAddedProduct.Name = "dataGridViewAddedProduct";
             this.dataGridViewAddedProduct.ReadOnly = true;
             this.dataGridViewAddedProduct.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewAddedProduct.Size = new System.Drawing.Size(649, 348);
+            this.dataGridViewAddedProduct.Size = new System.Drawing.Size(649, 376);
             this.dataGridViewAddedProduct.TabIndex = 11;
             this.dataGridViewAddedProduct.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewAddedProduct_CellContentClick);
             // 
             // btnAdd
             // 
             this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(397, 378);
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Location = new System.Drawing.Point(3, 43);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(116, 52);
+            this.btnAdd.Size = new System.Drawing.Size(101, 37);
             this.btnAdd.TabIndex = 12;
-            this.btnAdd.Text = "&Add";
+            this.btnAdd.Text = "&Add/Add more";
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -186,7 +194,7 @@
             this.panel1.Controls.Add(this.lblProductID);
             this.panel1.Controls.Add(this.txtbxProductQuantity);
             this.panel1.Controls.Add(this.txtbxOrigin);
-            this.panel1.Location = new System.Drawing.Point(8, 51);
+            this.panel1.Location = new System.Drawing.Point(9, 198);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(344, 186);
             this.panel1.TabIndex = 13;
@@ -197,46 +205,35 @@
             this.lblDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDisplay.Location = new System.Drawing.Point(21, -3);
             this.lblDisplay.Name = "lblDisplay";
-            this.lblDisplay.Size = new System.Drawing.Size(54, 15);
+            this.lblDisplay.Size = new System.Drawing.Size(133, 15);
             this.lblDisplay.TabIndex = 18;
-            this.lblDisplay.Text = "Display";
+            this.lblDisplay.Text = "Product Information";
             // 
             // btnDelete
             // 
             this.btnDelete.BackColor = System.Drawing.Color.Red;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnDelete.Location = new System.Drawing.Point(695, 378);
+            this.btnDelete.Location = new System.Drawing.Point(117, 43);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(116, 52);
+            this.btnDelete.Size = new System.Drawing.Size(104, 37);
             this.btnDelete.TabIndex = 14;
-            this.btnDelete.Text = "Delete";
+            this.btnDelete.Text = "&Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // button3
+            // btnReset
             // 
-            this.button3.Location = new System.Drawing.Point(892, 397);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(93, 27);
-            this.button3.TabIndex = 16;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnUpdate.Location = new System.Drawing.Point(548, 378);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(116, 52);
-            this.btnUpdate.TabIndex = 15;
-            this.btnUpdate.Text = "&Update";
-            this.btnUpdate.UseVisualStyleBackColor = false;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.btnReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnReset.Location = new System.Drawing.Point(235, 43);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(100, 37);
+            this.btnReset.TabIndex = 15;
+            this.btnReset.Text = "&Reset";
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // lblADDPROD
             // 
@@ -245,9 +242,9 @@
             this.lblADDPROD.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblADDPROD.Location = new System.Drawing.Point(36, 16);
             this.lblADDPROD.Name = "lblADDPROD";
-            this.lblADDPROD.Size = new System.Drawing.Size(294, 25);
+            this.lblADDPROD.Size = new System.Drawing.Size(299, 25);
             this.lblADDPROD.TabIndex = 17;
-            this.lblADDPROD.Text = "ADD PRODUCT TO IMPORT";
+            this.lblADDPROD.Text = "ADD PRODUCT TO EXPORT";
             // 
             // panel2
             // 
@@ -258,14 +255,12 @@
             this.panel2.Controls.Add(this.lblStoreName);
             this.panel2.Controls.Add(this.cbbxStoreName);
             this.panel2.Controls.Add(this.lblStoreLocation);
-            this.panel2.Controls.Add(this.lblProductToImport);
             this.panel2.Controls.Add(this.txtbxStoreID);
             this.panel2.Controls.Add(this.txtbxStoreLocation);
             this.panel2.Controls.Add(this.lblStoreID);
-            this.panel2.Controls.Add(this.txtbxQuantityToImport);
-            this.panel2.Location = new System.Drawing.Point(8, 256);
+            this.panel2.Location = new System.Drawing.Point(9, 44);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(344, 178);
+            this.panel2.Size = new System.Drawing.Size(344, 143);
             this.panel2.TabIndex = 19;
             // 
             // lblSessionUser
@@ -291,9 +286,9 @@
             this.lblProductChoose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProductChoose.Location = new System.Drawing.Point(21, -3);
             this.lblProductChoose.Name = "lblProductChoose";
-            this.lblProductChoose.Size = new System.Drawing.Size(55, 15);
+            this.lblProductChoose.Size = new System.Drawing.Size(144, 15);
             this.lblProductChoose.TabIndex = 18;
-            this.lblProductChoose.Text = "Choose";
+            this.lblProductChoose.Text = "Select Store Location";
             // 
             // lblStoreName
             // 
@@ -327,11 +322,11 @@
             // 
             this.lblProductToImport.AutoSize = true;
             this.lblProductToImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProductToImport.Location = new System.Drawing.Point(5, 145);
+            this.lblProductToImport.Location = new System.Drawing.Point(5, 12);
             this.lblProductToImport.Name = "lblProductToImport";
-            this.lblProductToImport.Size = new System.Drawing.Size(106, 13);
+            this.lblProductToImport.Size = new System.Drawing.Size(157, 13);
             this.lblProductToImport.TabIndex = 4;
-            this.lblProductToImport.Text = "Product to Export";
+            this.lblProductToImport.Text = "Product Quantity to Export";
             // 
             // txtbxStoreID
             // 
@@ -358,27 +353,115 @@
             // 
             // txtbxQuantityToImport
             // 
-            this.txtbxQuantityToImport.Location = new System.Drawing.Point(114, 145);
+            this.txtbxQuantityToImport.Location = new System.Drawing.Point(168, 9);
             this.txtbxQuantityToImport.Name = "txtbxQuantityToImport";
             this.txtbxQuantityToImport.Size = new System.Drawing.Size(79, 20);
             this.txtbxQuantityToImport.TabIndex = 8;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.Silver;
+            this.panel3.Controls.Add(this.lblProductToImport);
+            this.panel3.Controls.Add(this.txtbxQuantityToImport);
+            this.panel3.Controls.Add(this.btnAdd);
+            this.panel3.Controls.Add(this.btnReset);
+            this.panel3.Controls.Add(this.btnDelete);
+            this.panel3.Location = new System.Drawing.Point(9, 397);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(344, 91);
+            this.panel3.TabIndex = 20;
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Location = new System.Drawing.Point(3, 12);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(65, 13);
+            this.lblTotal.TabIndex = 21;
+            this.lblTotal.Text = "Total Cost";
+            // 
+            // txtbxTotalCost
+            // 
+            this.txtbxTotalCost.Location = new System.Drawing.Point(110, 9);
+            this.txtbxTotalCost.Name = "txtbxTotalCost";
+            this.txtbxTotalCost.Size = new System.Drawing.Size(107, 20);
+            this.txtbxTotalCost.TabIndex = 22;
+            // 
+            // cbbxPaymentMethod
+            // 
+            this.cbbxPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbbxPaymentMethod.FormattingEnabled = true;
+            this.cbbxPaymentMethod.Location = new System.Drawing.Point(110, 53);
+            this.cbbxPaymentMethod.Name = "cbbxPaymentMethod";
+            this.cbbxPaymentMethod.Size = new System.Drawing.Size(107, 21);
+            this.cbbxPaymentMethod.TabIndex = 21;
+            // 
+            // lblPaymentMethod
+            // 
+            this.lblPaymentMethod.AutoSize = true;
+            this.lblPaymentMethod.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPaymentMethod.Location = new System.Drawing.Point(3, 56);
+            this.lblPaymentMethod.Name = "lblPaymentMethod";
+            this.lblPaymentMethod.Size = new System.Drawing.Size(101, 13);
+            this.lblPaymentMethod.TabIndex = 23;
+            this.lblPaymentMethod.Text = "Payment Method";
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.RosyBrown;
+            this.panel4.Controls.Add(this.lblTotal);
+            this.panel4.Controls.Add(this.lblPaymentMethod);
+            this.panel4.Controls.Add(this.txtbxTotalCost);
+            this.panel4.Controls.Add(this.cbbxPaymentMethod);
+            this.panel4.Location = new System.Drawing.Point(488, 406);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(229, 80);
+            this.panel4.TabIndex = 24;
+            // 
+            // btnCreateExport
+            // 
+            this.btnCreateExport.BackColor = System.Drawing.Color.Green;
+            this.btnCreateExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreateExport.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnCreateExport.Location = new System.Drawing.Point(751, 409);
+            this.btnCreateExport.Name = "btnCreateExport";
+            this.btnCreateExport.Size = new System.Drawing.Size(239, 41);
+            this.btnCreateExport.TabIndex = 25;
+            this.btnCreateExport.Text = "Create Export Bill";
+            this.btnCreateExport.UseVisualStyleBackColor = false;
+            this.btnCreateExport.Click += new System.EventHandler(this.btnCreateExport_Click);
+            // 
+            // btnExit
+            // 
+            this.btnExit.BackColor = System.Drawing.Color.Crimson;
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnExit.Location = new System.Drawing.Point(842, 465);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.TabIndex = 26;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // frmAddProductExport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Tan;
-            this.ClientSize = new System.Drawing.Size(1015, 455);
+            this.ClientSize = new System.Drawing.Size(1024, 514);
             this.ControlBox = false;
+            this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.btnCreateExport);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.lblADDPROD);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.btnUpdate);
-            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dataGridViewAddedProduct);
             this.Name = "frmAddProductExport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAddProductExport";
             this.Load += new System.EventHandler(this.frmAddProductImport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAddedProduct)).EndInit();
@@ -386,6 +469,10 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -407,8 +494,7 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Label lblDisplay;
         private System.Windows.Forms.Label lblADDPROD;
         private System.Windows.Forms.Panel panel2;
@@ -423,5 +509,13 @@
         private System.Windows.Forms.TextBox txtbxQuantityToImport;
         private System.Windows.Forms.Label lblSessionUser;
         private System.Windows.Forms.TextBox txtbxSessionUser;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.TextBox txtbxTotalCost;
+        private System.Windows.Forms.ComboBox cbbxPaymentMethod;
+        private System.Windows.Forms.Label lblPaymentMethod;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button btnCreateExport;
+        private System.Windows.Forms.Button btnExit;
     }
 }

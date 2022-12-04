@@ -86,3 +86,46 @@ select * from Import
 select * from ImportDetail
 select * from Product
 delete from Product where productID = 'TSALAD-20'
+
+
+create table PaymentMethod(
+	paymentID varchar(255) not null,
+	constraint PK_paymentID primary key(paymentID),
+	paymentName char(255) not null,
+)
+insert into PaymentMethod values ('BNK', 'Banking')
+insert into PaymentMethod values ('CSH', 'Cash')
+
+create table Export (
+	exportID nvarchar(255) not null,
+	exportTotalProduct int,
+	exportTotalPrice nvarchar(255), --nhớ có chiết khấu
+	exportCreated date,
+	exportStatus int,
+	accountID varchar(255) not null,
+	paymentID varchar(255) not null,
+	storeID varchar(255) not null,
+
+	constraint PK_exportID primary key(exportID),
+	constraint FK_Export_Account_accountID foreign key(accountID) references Account(accountID),
+	constraint FK_Export_PaymentMethod_paymentID foreign key (paymentID) references PaymentMethod(paymentID),
+	constraint FK_Export_Store_storeID foreign key (storeID) references Store(storeID),
+)
+create table ExportDetail(
+	exportID nvarchar(255) not null,
+	productID varchar(255) not null,
+
+	--không cần thiết vì mình cũng sẽ phải add product trước r mới chạy được cái này
+	productName nvarchar(255) not null,
+	productPrice int not null,
+	productQuantity int not null,
+	productOrigin nvarchar(255) not null,
+	primary key(exportID, productID),
+	constraint FK_ExportDetail_Export_exportID foreign key(exportID) references Export(exportID),
+	constraint FK_ExportDetail_Product_productID foreign key(productID) references Product(productID)
+)
+drop table ExportDetail	
+drop table Export
+select * from PaymentMethod
+select * from Export
+select * from ExportDetail
