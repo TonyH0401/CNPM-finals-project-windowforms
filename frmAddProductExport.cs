@@ -20,7 +20,6 @@ namespace Finals_Project
         //the quantity after this will be saved into the database
         Dictionary<string, int> initialProductQuantity = new Dictionary<string, int>();
         private String sessionAccountID = "";
-        //private double storeTax = -1;
         public frmAddProductExport()
         {
             InitializeComponent();
@@ -38,7 +37,7 @@ namespace Finals_Project
 
             initiateComboBoxPaymentMethod();
         }
-
+        //done
         public void initiateComponents()
         {
             //product display panel
@@ -444,7 +443,7 @@ namespace Finals_Project
                 txtbxTotalCost.Clear();
             }
         }
-        
+        //done
         private void btnReset_Click(object sender, EventArgs e)
         {
             //clear all data
@@ -488,7 +487,7 @@ namespace Finals_Project
             string dateTime = DateTime.Now.ToString("yyyy-MM-dd").Replace("-", "");
             return "EXPRT"+ dateTime + exportBillCounter;
         }
-
+        //done
         public void insertExportBill(String exportBillID, String paymentMethodID)
         {
             String exportID = exportBillID;
@@ -531,6 +530,7 @@ namespace Finals_Project
                 MessageBox.Show("Some error occur: " + ex.Message + " - " + ex.Source);
             }
         }
+        //done
         public void insertExportBillDetail(String exportBillID)
         {
             foreach (DataGridViewRow row in dataGridViewAddedProduct.Rows)

@@ -127,5 +127,7 @@ create table ExportDetail(
 drop table ExportDetail	
 drop table Export
 select * from PaymentMethod
+delete from ExportDetail
+delete from Export
 select * from Export
 select * from ExportDetail
