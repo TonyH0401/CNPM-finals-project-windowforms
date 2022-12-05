@@ -83,3 +83,4 @@ D:\1.TDTU\2.CNPM\Finals Project\obj\Debug\Finals Project.csproj.CopyComplete
 D:\1.TDTU\2.CNPM\Finals Project\obj\Debug\Finals_Project.frmPrint.resources
 D:\1.TDTU\2.CNPM\Finals Project\obj\Debug\Finals_Project.frmExport.resources
 D:\1.TDTU\2.CNPM\Finals Project\obj\Debug\Finals_Project.frmPrintExport.resources
+D:\1.TDTU\2.CNPM\Finals Project\obj\Debug\Finals_Project.frmStatistic.resources
