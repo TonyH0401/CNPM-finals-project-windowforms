@@ -126,15 +126,24 @@ create table ExportDetail(
 	constraint FK_ExportDetail_Export_exportID foreign key(exportID) references Export(exportID),
 	constraint FK_ExportDetail_Product_productID foreign key(productID) references Product(productID)
 )
-drop table ExportDetail	
-drop table Export
+--drop table ExportDetail	
+--drop table Export
 select * from PaymentMethod
 --delete from ExportDetail
 --delete from Export
 select * from Export
 select * from ExportDetail
 select * from Import
+select * from ImportDetail
 select sum(importTotalPrice) from Import
 
 select exportTotalPrice from Export where MONTH(exportCreated) = 12
 select importTotalPrice from Import where MONTH(importCreated) = 12 and day(importCreated) = 03
+
+select I.importID, importTotalPrice, importCreated, productID, productName, productPrice, productQuantity, productOrigin
+from Import as I, ImportDetail as ID
+where I.importID = ID.importID and MONTH(importCreated) = 12 and day(importCreated) = 01
+
+select E.exportStatus, E.exportID, exportTotalPrice, E.storeID, E.paymentID, exportCreated, productID, productName, productPrice, productQuantity, productOrigin
+from Export as E, ExportDetail as ED
+where E.exportID = ED.exportID and MONTH(exportCreated) = 12 and day(exportCreated) = 05

@@ -69,6 +69,7 @@
             this.dataGridViewImport.Location = new System.Drawing.Point(12, 228);
             this.dataGridViewImport.Name = "dataGridViewImport";
             this.dataGridViewImport.ReadOnly = true;
+            this.dataGridViewImport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewImport.Size = new System.Drawing.Size(382, 150);
             this.dataGridViewImport.TabIndex = 1;
             // 
@@ -80,6 +81,7 @@
             this.dataGridViewExport.Location = new System.Drawing.Point(406, 228);
             this.dataGridViewExport.Name = "dataGridViewExport";
             this.dataGridViewExport.ReadOnly = true;
+            this.dataGridViewExport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewExport.Size = new System.Drawing.Size(382, 150);
             this.dataGridViewExport.TabIndex = 2;
             // 
