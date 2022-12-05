@@ -149,12 +149,17 @@ namespace Finals_Project
             if (exportStatusValue.Equals("0") == true)
             {
                 txtbxExportStatus.Text = "Delivering";
-                txtbxExportStatus.ForeColor = Color.Red;
+                txtbxExportStatus.ForeColor = Color.White;
+                txtbxExportStatus.BackColor = Color.Red;
+                btnConfirm.Enabled = true;
+                btnConfirm.ForeColor = Color.White;
             }
             else if (exportStatusValue.Equals("1") == true)
             {
                 txtbxExportStatus.Text = "Received";
-                txtbxExportStatus.ForeColor = Color.Green;
+                txtbxExportStatus.ForeColor = Color.White;
+                txtbxExportStatus.BackColor = Color.Green;
+                btnConfirm.Enabled = false;
             } 
             else
             {
@@ -239,12 +244,95 @@ namespace Finals_Project
         {
             this.frmExport_Load(null, EventArgs.Empty);
         }
+        //done
+        public void updateExportStatusDatabase(String exportID, int exportStatus)
+        {
+            SqlConnection conn = new SqlConnection(Program.strConn);
+            conn.Open();
+            String sSQL = "update Export set exportStatus = @exportStatus where exportID = @exportID";
+            SqlCommand cmd = new SqlCommand(sSQL, conn);
+            cmd.Parameters.AddWithValue("@exportID", exportID);
+            cmd.Parameters.AddWithValue("@exportStatus", exportStatus);
+            int i = cmd.ExecuteNonQuery();
+            if (i != 0)
+            {
+                //MessageBox.Show("Saved");
+            }
+            else
+            {
+                MessageBox.Show("Error");
+            }
+            conn.Close();
+        }
+        //done
+        public Dictionary<String, int> getProductIDFromExportDetail(String exportID)
+        {
+            Dictionary<String, int> result = new Dictionary<String, int>();
 
+            SqlConnection conn = new SqlConnection(Program.strConn);
+            conn.Open();
+            String sSQL = "select productID, productQuantity from ExportDetail where exportID = @exportID";
+            SqlCommand cmd = new SqlCommand(sSQL, conn);
+            cmd.Parameters.AddWithValue("@exportID", exportID);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                foreach(DataRow dr in dt.Rows)
+                {
+                    result.Add(dr[0].ToString().Trim(), Int32.Parse(dr[1].ToString().Trim()));
+                }
+            }
+            else
+            {
+                MessageBox.Show("Invalid Login. Please check Username or Password!", "Warning");
+            }
+            return result;
+        }
+        public void updateProductQuantityExportDatabase(String exportID)
+        {
+            Dictionary<String, int> productList = getProductIDFromExportDetail(exportID);
+            foreach (KeyValuePair<String, int> entry in productList)
+            {
+                SqlConnection conn = new SqlConnection(Program.strConn);
+                conn.Open();
+                String sSQL = "update Product set productQuantity = productQuantity - @productQuantity where productID = @productID";
+                SqlCommand cmd = new SqlCommand(sSQL, conn);
+                cmd.Parameters.AddWithValue("@productID", entry.Key);
+                cmd.Parameters.AddWithValue("@productQuantity", entry.Value);
+                int i = cmd.ExecuteNonQuery();
+                if (i != 0)
+                {
+                    //MessageBox.Show("Saved");
+                }
+                else
+                {
+                    MessageBox.Show("Error");
+                }
+                conn.Close();
+            }
+        }
+        //done
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            //1.change the status
-            //2.update quantity in db
-            //3.disable the button forever, this should also be done for loading and index change
+            DialogResult dt = MessageBox.Show("Do you want to Confirm Delivery", "System Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dt == DialogResult.Yes)
+            {
+                //1.change the status display
+                if (txtbxExportStatus.Text.Equals("Delivering") == true)
+                {
+                    txtbxExportStatus.Text = "Received";
+                    txtbxExportStatus.ForeColor = Color.White;
+                    txtbxExportStatus.BackColor = Color.Green;
+                    btnConfirm.Enabled = false;
+                }
+                //2.change export status in db
+                updateExportStatusDatabase(listBoxExportID.SelectedValue.ToString().Trim(), 1);
+                //2.update quantity in db
+                updateProductQuantityExportDatabase(listBoxExportID.SelectedValue.ToString().Trim());
+                //3.disable the button forever, this should also be done for loading and index change
+            }
         }
     }
 }
