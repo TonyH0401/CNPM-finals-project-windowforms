@@ -146,4 +146,34 @@ where I.importID = ID.importID and MONTH(importCreated) = 12 and day(importCreat
 
 select E.exportStatus, E.exportID, exportTotalPrice, E.storeID, E.paymentID, exportCreated, productID, productName, productPrice, productQuantity, productOrigin
 from Export as E, ExportDetail as ED
-where E.exportID = ED.exportID and MONTH(exportCreated) = 12 and day(exportCreated) = 05
+where E.exportID = ED.exportID and MONTH(exportCreated) = 12 and day(exportCreated) = 04
+
+select productID, COUNT(productID) as Counter
+from ImportDetail
+group by productID
+order by Counter desc
+
+select DISTINCT(productID)
+from ImportDetail
+
+SELECT COUNT(DISTINCT productID)
+FROM ImportDetail
+
+select productID, productName, SUM(productQuantity) as Quantity
+from Import as I, ImportDetail as ID
+where I.importID = ID.importID
+group by productID, productName
+
+select top 2 productID, productName, sum(productQuantity) as TotalQuantity
+from Import as I, ImportDetail as ID
+where I.importID = ID.importID and MONTH(importCreated) = 12 --and DAY(importCreated) = 03
+group by productID, productName
+order by TotalQuantity desc
+
+select * from Export
+select * from ExportDetail
+select top 2 productID, productName, sum(productQuantity) as TotalQuantity
+from Export as E, ExportDetail as ED
+where E.exportID = ED.exportID and E.exportStatus = 1 and MONTH(exportCreated) = 12 --and DAY(importCreated) = 03
+group by productID, productName
+order by TotalQuantity desc, productID asc

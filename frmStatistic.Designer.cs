@@ -43,9 +43,17 @@
             this.txtbxImportValue = new System.Windows.Forms.TextBox();
             this.txtbxExportValue = new System.Windows.Forms.TextBox();
             this.lblLabel = new System.Windows.Forms.Label();
+            this.dataGridViewTopImport = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTopExport = new System.Windows.Forms.DataGridView();
+            this.lblTopImport = new System.Windows.Forms.Label();
+            this.lblTopExport = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExport)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTopImport)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTopExport)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -56,7 +64,7 @@
             this.panel1.Controls.Add(this.lblSelectTime);
             this.panel1.Controls.Add(this.dateTimePickerCurrentTime);
             this.panel1.Controls.Add(this.lblCurrentTime);
-            this.panel1.Location = new System.Drawing.Point(28, 73);
+            this.panel1.Location = new System.Drawing.Point(16, 38);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(311, 111);
             this.panel1.TabIndex = 0;
@@ -66,7 +74,7 @@
             this.dataGridViewImport.AllowUserToAddRows = false;
             this.dataGridViewImport.AllowUserToDeleteRows = false;
             this.dataGridViewImport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewImport.Location = new System.Drawing.Point(12, 228);
+            this.dataGridViewImport.Location = new System.Drawing.Point(12, 260);
             this.dataGridViewImport.Name = "dataGridViewImport";
             this.dataGridViewImport.ReadOnly = true;
             this.dataGridViewImport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -78,7 +86,7 @@
             this.dataGridViewExport.AllowUserToAddRows = false;
             this.dataGridViewExport.AllowUserToDeleteRows = false;
             this.dataGridViewExport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewExport.Location = new System.Drawing.Point(406, 228);
+            this.dataGridViewExport.Location = new System.Drawing.Point(406, 260);
             this.dataGridViewExport.Name = "dataGridViewExport";
             this.dataGridViewExport.ReadOnly = true;
             this.dataGridViewExport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -136,7 +144,7 @@
             this.lblImport.AutoSize = true;
             this.lblImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblImport.ForeColor = System.Drawing.Color.OliveDrab;
-            this.lblImport.Location = new System.Drawing.Point(133, 195);
+            this.lblImport.Location = new System.Drawing.Point(133, 227);
             this.lblImport.Name = "lblImport";
             this.lblImport.Size = new System.Drawing.Size(126, 31);
             this.lblImport.TabIndex = 3;
@@ -147,7 +155,7 @@
             this.lblExport.AutoSize = true;
             this.lblExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblExport.ForeColor = System.Drawing.Color.Red;
-            this.lblExport.Location = new System.Drawing.Point(536, 195);
+            this.lblExport.Location = new System.Drawing.Point(536, 229);
             this.lblExport.Name = "lblExport";
             this.lblExport.Size = new System.Drawing.Size(132, 31);
             this.lblExport.TabIndex = 4;
@@ -158,7 +166,7 @@
             this.lblImportValue.AutoSize = true;
             this.lblImportValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblImportValue.ForeColor = System.Drawing.Color.OliveDrab;
-            this.lblImportValue.Location = new System.Drawing.Point(12, 381);
+            this.lblImportValue.Location = new System.Drawing.Point(12, 413);
             this.lblImportValue.Name = "lblImportValue";
             this.lblImportValue.Size = new System.Drawing.Size(145, 20);
             this.lblImportValue.TabIndex = 5;
@@ -169,7 +177,7 @@
             this.lblExportValue.AutoSize = true;
             this.lblExportValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblExportValue.ForeColor = System.Drawing.Color.Red;
-            this.lblExportValue.Location = new System.Drawing.Point(402, 381);
+            this.lblExportValue.Location = new System.Drawing.Point(402, 413);
             this.lblExportValue.Name = "lblExportValue";
             this.lblExportValue.Size = new System.Drawing.Size(149, 20);
             this.lblExportValue.TabIndex = 6;
@@ -177,14 +185,14 @@
             // 
             // txtbxImportValue
             // 
-            this.txtbxImportValue.Location = new System.Drawing.Point(163, 383);
+            this.txtbxImportValue.Location = new System.Drawing.Point(163, 415);
             this.txtbxImportValue.Name = "txtbxImportValue";
             this.txtbxImportValue.Size = new System.Drawing.Size(146, 20);
             this.txtbxImportValue.TabIndex = 7;
             // 
             // txtbxExportValue
             // 
-            this.txtbxExportValue.Location = new System.Drawing.Point(557, 384);
+            this.txtbxExportValue.Location = new System.Drawing.Point(557, 416);
             this.txtbxExportValue.Name = "txtbxExportValue";
             this.txtbxExportValue.Size = new System.Drawing.Size(146, 20);
             this.txtbxExportValue.TabIndex = 8;
@@ -194,18 +202,76 @@
             this.lblLabel.AutoSize = true;
             this.lblLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLabel.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lblLabel.Location = new System.Drawing.Point(183, 15);
+            this.lblLabel.Location = new System.Drawing.Point(183, 6);
             this.lblLabel.Name = "lblLabel";
             this.lblLabel.Size = new System.Drawing.Size(427, 29);
             this.lblLabel.TabIndex = 9;
             this.lblLabel.Text = "IMPORT AND EXPORT STATISTIC";
             // 
+            // dataGridViewTopImport
+            // 
+            this.dataGridViewTopImport.AllowUserToAddRows = false;
+            this.dataGridViewTopImport.AllowUserToDeleteRows = false;
+            this.dataGridViewTopImport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewTopImport.Location = new System.Drawing.Point(98, 12);
+            this.dataGridViewTopImport.Name = "dataGridViewTopImport";
+            this.dataGridViewTopImport.ReadOnly = true;
+            this.dataGridViewTopImport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewTopImport.Size = new System.Drawing.Size(351, 79);
+            this.dataGridViewTopImport.TabIndex = 10;
+            // 
+            // dataGridViewTopExport
+            // 
+            this.dataGridViewTopExport.AllowUserToAddRows = false;
+            this.dataGridViewTopExport.AllowUserToDeleteRows = false;
+            this.dataGridViewTopExport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewTopExport.Location = new System.Drawing.Point(98, 107);
+            this.dataGridViewTopExport.Name = "dataGridViewTopExport";
+            this.dataGridViewTopExport.ReadOnly = true;
+            this.dataGridViewTopExport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewTopExport.Size = new System.Drawing.Size(351, 79);
+            this.dataGridViewTopExport.TabIndex = 11;
+            // 
+            // lblTopImport
+            // 
+            this.lblTopImport.AutoSize = true;
+            this.lblTopImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTopImport.ForeColor = System.Drawing.Color.YellowGreen;
+            this.lblTopImport.Location = new System.Drawing.Point(6, 12);
+            this.lblTopImport.Name = "lblTopImport";
+            this.lblTopImport.Size = new System.Drawing.Size(86, 17);
+            this.lblTopImport.TabIndex = 12;
+            this.lblTopImport.Text = "Top Import";
+            // 
+            // lblTopExport
+            // 
+            this.lblTopExport.AutoSize = true;
+            this.lblTopExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTopExport.ForeColor = System.Drawing.Color.Red;
+            this.lblTopExport.Location = new System.Drawing.Point(6, 107);
+            this.lblTopExport.Name = "lblTopExport";
+            this.lblTopExport.Size = new System.Drawing.Size(87, 17);
+            this.lblTopExport.TabIndex = 13;
+            this.lblTopExport.Text = "Top Export";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.panel2.Controls.Add(this.dataGridViewTopExport);
+            this.panel2.Controls.Add(this.lblTopImport);
+            this.panel2.Controls.Add(this.lblTopExport);
+            this.panel2.Controls.Add(this.dataGridViewTopImport);
+            this.panel2.Location = new System.Drawing.Point(333, 38);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(464, 193);
+            this.panel2.TabIndex = 14;
+            // 
             // frmStatistic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 412);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(800, 443);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.lblLabel);
             this.Controls.Add(this.txtbxExportValue);
             this.Controls.Add(this.txtbxImportValue);
@@ -216,6 +282,8 @@
             this.Controls.Add(this.dataGridViewExport);
             this.Controls.Add(this.dataGridViewImport);
             this.Controls.Add(this.panel1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmStatistic";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmStatistic";
@@ -224,6 +292,10 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExport)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTopImport)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTopExport)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,5 +318,10 @@
         private System.Windows.Forms.TextBox txtbxImportValue;
         private System.Windows.Forms.TextBox txtbxExportValue;
         private System.Windows.Forms.Label lblLabel;
+        private System.Windows.Forms.DataGridView dataGridViewTopImport;
+        private System.Windows.Forms.DataGridView dataGridViewTopExport;
+        private System.Windows.Forms.Label lblTopImport;
+        private System.Windows.Forms.Label lblTopExport;
+        private System.Windows.Forms.Panel panel2;
     }
 }

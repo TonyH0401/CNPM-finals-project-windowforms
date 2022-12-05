@@ -42,11 +42,15 @@ namespace Finals_Project
             String dayMonthYear = dateTimePickerImportExportBill.Value.ToString("yyyy-MM-dd").Trim();
             int year = Int32.Parse(dayMonthYear.Split('-')[0]);
             int month = Int32.Parse(dayMonthYear.Split('-')[1]);
-            //action
+            //load total value and product by month
             txtbxImportValue.Text = getTotalPriceByMonthImport(year, month).ToString().Trim();
             getImportDetailByMonth(year, month);
             txtbxExportValue.Text = getTotalPriceByMonthExport(year, month).ToString().Trim();
             getExportDetailByMonth(year, month);
+            //top product
+            getTopImport(year, month);
+            //top product export, WITH STATUS 1 ONLY - this explained the E.exportStatus = 1
+            getTopExport(year, month);
         }
         public double getTotalPriceByMonthImport(int year, int month)
         {
@@ -140,6 +144,48 @@ namespace Finals_Project
             {
                 //MessageBox.Show("No Detail Export Data for month: " + month, "Warning");
                 dataGridViewExport.DataSource=null;
+            }
+        }
+        public void getTopImport(int year, int month)
+        {
+            SqlConnection conn = new SqlConnection(Program.strConn);
+            conn.Open();
+            String sSQL = "select top 2 productID as ID, productName as Name, sum(productQuantity) as TotalQuantity from Import as I, ImportDetail as ID where I.importID = ID.importID and MONTH(importCreated) = @month and YEAR(importCreated) = @year group by productID, productName order by TotalQuantity desc";
+            SqlCommand cmd = new SqlCommand(sSQL, conn);
+            cmd.Parameters.AddWithValue("@month", month);
+            cmd.Parameters.AddWithValue("@year", year);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                dataGridViewTopImport.DataSource = dt;
+            }
+            else
+            {
+                //MessageBox.Show("No Detail Import Data for month: " + month, "Warning");
+                dataGridViewTopImport.DataSource = null;
+            }
+        }
+        public void getTopExport(int year, int month)
+        {
+            SqlConnection conn = new SqlConnection(Program.strConn);
+            conn.Open();
+            String sSQL = "select top 2 productID, productName, sum(productQuantity) as TotalQuantity from Export as E, ExportDetail as ED where E.exportID = ED.exportID and E.exportStatus = 1 and MONTH(exportCreated) = @month and YEAR(exportCreated) = @year group by productID, productName order by TotalQuantity desc, productID asc";
+            SqlCommand cmd = new SqlCommand(sSQL, conn);
+            cmd.Parameters.AddWithValue("@month", month);
+            cmd.Parameters.AddWithValue("@year", year);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                dataGridViewTopExport.DataSource = dt;
+            }
+            else
+            {
+                //MessageBox.Show("No Detail Import Data for month: " + month, "Warning");
+                dataGridViewTopExport.DataSource = null;
             }
         }
     }
