@@ -131,3 +131,4 @@ delete from ExportDetail
 delete from Export
 select * from Export
 select * from ExportDetail
+select * from Product

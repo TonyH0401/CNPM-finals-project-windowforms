@@ -15,6 +15,8 @@ namespace Finals_Project
     {
         private String sessionAccount = "";
         private String sessAccountPhone = "";
+        private DataTable dtProduct = new DataTable();
+        private String dtProductTotal = "";
         public frmExport()
         {
             InitializeComponent();
@@ -25,6 +27,8 @@ namespace Finals_Project
             initiateComponents();
             getSessionUserData();
             getExportIDList();
+
+            //add a visible button for employee but not for acct
         }
         public void initiateComponents()
         {
@@ -194,28 +198,25 @@ namespace Finals_Project
                 MessageBox.Show(ex.Message);
             }
         }
-        //
+        //done
         public void getDetailDataFromExportID()
         {
             try
             {
                 SqlConnection conn = new SqlConnection(Program.strConn);
                 conn.Open();
-
                 String sSQL = "select productID, productName, productPrice, productQuantity, productOrigin from ExportDetail where exportID = @exportID";
                 SqlCommand cmd = new SqlCommand(sSQL, conn);
                 cmd.Parameters.AddWithValue("@exportID", listBoxExportID.SelectedValue.ToString().Trim());
-
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
-
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 if (dt.Rows.Count > 0)
                 {
                     dataGridViewExportDetail.DataSource = dt;
                     //be used in ReportViewer
-                    //dtProduct = dt;
-                    //dtProductTotal = dt.Rows.Count.ToString().Trim();
+                    dtProduct = dt;
+                    dtProductTotal = dt.Rows.Count.ToString().Trim();
                 }
                 else
                 {
@@ -333,6 +334,38 @@ namespace Finals_Project
                 updateProductQuantityExportDatabase(listBoxExportID.SelectedValue.ToString().Trim());
                 //3.disable the button forever, this should also be done for loading and index change
             }
+        }
+        //done
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            List<Product> dataSourceProduct = convertDataTableToListProduct(dtProduct);
+            String exportID = listBoxExportID.SelectedValue.ToString().Trim();
+            String storeID = txtbxStoreID.Text.ToString().Trim();
+            String accountID = txtAccount.Text.ToString().Trim();
+            String paymentMethod = txtbxPaymentMethod.Text.ToString().Trim();
+            String exportStatus = txtbxExportStatus.Text.ToString().Trim();
+            String date = dateTimePickerExportCreated.Text.ToString().Trim();
+            String totalPrice = txtTotal.Text.ToString().Trim();
+            String totalQuantity = dtProductTotal.ToString().Trim();
+
+            frmPrintExport f = new frmPrintExport(dataSourceProduct,exportID,storeID,accountID,paymentMethod,exportStatus,date,totalPrice,totalQuantity);
+            f.ShowDialog();
+        }
+        //done
+        public List<Product> convertDataTableToListProduct(DataTable inputDataTable)
+        {
+            List<Product> res = new List<Product>();
+            foreach (DataRow row in inputDataTable.Rows)
+            {
+                Product product = new Product();
+                product.id = row[0].ToString();
+                product.name = row[1].ToString();
+                product.price = row[2].ToString();
+                product.quantity = row[3].ToString();
+                product.origin = row[4].ToString();
+                res.Add(product);
+            }
+            return res;
         }
     }
 }

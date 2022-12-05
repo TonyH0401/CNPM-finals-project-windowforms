@@ -165,12 +165,13 @@
             this.btnPrint.TabIndex = 14;
             this.btnPrint.Text = "Print";
             this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnConfirm
             // 
             this.btnConfirm.BackColor = System.Drawing.Color.Orange;
             this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfirm.Location = new System.Drawing.Point(170, 159);
+            this.btnConfirm.Location = new System.Drawing.Point(28, 158);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(100, 30);
             this.btnConfirm.TabIndex = 8;
@@ -182,7 +183,7 @@
             // 
             this.btnNewExport.BackColor = System.Drawing.Color.LawnGreen;
             this.btnNewExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewExport.Location = new System.Drawing.Point(27, 158);
+            this.btnNewExport.Location = new System.Drawing.Point(167, 159);
             this.btnNewExport.Name = "btnNewExport";
             this.btnNewExport.Size = new System.Drawing.Size(100, 30);
             this.btnNewExport.TabIndex = 7;
