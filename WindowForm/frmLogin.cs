@@ -13,6 +13,7 @@ namespace Finals_Project
 {
     public partial class frmLogin : Form
     {
+        private int wrongInputTries = 0;
         public frmLogin()
         {
             InitializeComponent();
@@ -34,28 +35,37 @@ namespace Finals_Project
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(Program.strConn);
-            conn.Open();
-
-            String sSQL = "select accountID, accountPassword from Account where accountID=@accountID and accountPassword=@accountPassword";
-            SqlCommand cmd = new SqlCommand(sSQL, conn);
-            cmd.Parameters.AddWithValue("@accountID", txtbxUsername.Text.ToString().Trim());
-            cmd.Parameters.AddWithValue("@accountPassword", txtbxPassword.Text.ToString().Trim());
-
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            if (dt.Rows.Count > 0)
+            try
             {
-                String sessionACCT = (String) dt.Rows[0][0];
-                Program.sessionAccount = sessionACCT;
-                MessageBox.Show("Login Successful!", "Sucess Login");
-                this.Close();
+                SqlConnection conn = new SqlConnection(Program.strConn);
+                conn.Open();
+                String sSQL = "select accountID, accountPassword from Account where accountID=@accountID and accountPassword=@accountPassword";
+                SqlCommand cmd = new SqlCommand(sSQL, conn);
+                cmd.Parameters.AddWithValue("@accountID", txtbxUsername.Text.ToString().Trim());
+                cmd.Parameters.AddWithValue("@accountPassword", txtbxPassword.Text.ToString().Trim());
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    String sessionACCT = (String)dt.Rows[0][0];
+                    Program.sessionAccount = sessionACCT;
+                    MessageBox.Show("Login Successful! Welcome", "SUCCESSFUL LOGIN", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    this.Close();
+                }
+                else
+                {
+                    wrongInputTries++;
+                    MessageBox.Show("Invalid Login. Please check Username or Password!\nYou have: " +(5-wrongInputTries).ToString().Trim() +" tries left", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if(wrongInputTries == 5)
+                    {
+                        Application.Exit();
+                    }
+                }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("Invalid Login. Please check Username or Password!", "Warning");
+                MessageBox.Show("Error! Please reload the Application", "ERROR");
             }
         }
 

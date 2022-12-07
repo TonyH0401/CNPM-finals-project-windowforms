@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,7 +14,6 @@ namespace Finals_Project
 {
     public partial class frmMain : Form
     {
-        private String sessionAccountId = "";
         public frmMain()
         {
             InitializeComponent();
@@ -24,6 +24,9 @@ namespace Finals_Project
             loadLoginFRM();
             initiateComponents();
             getDataFromSessionAccountID();
+            //Update the UserAccount handle on the menustrip with AccountID, THIS IS IN THE TIMER FUNCTION
+            //because there will be error if we load it here, when on exist from Login
+            this.Text = "Homepage of " + getSessionAccountIDFromProgram();
         }
         public void initiateComponents()
         {
@@ -114,6 +117,36 @@ namespace Finals_Project
             if (dt == DialogResult.Yes)
             {
                 Application.Exit();
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
+            //Update the UserAccount handle on the menustrip with AccountID, THIS IS IN THE TIMER FUNCTION
+            //because there will be error if we load it in frmMain_Load, when on exist from Login
+            menuStrip1.Items[3].Text = getSessionAccountIDFromProgram();
+        }
+        public bool viewProductAuthentication()
+        {
+            String temp = getSessionAccountIDFromProgram();
+            if (temp.Equals("admin") == true || temp.Contains("ACCT") == true)
+            {
+                return true;
+            }
+            return false;
+        }
+        private void viewProductsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool authentication = viewProductAuthentication();
+            if(authentication == true)
+            {
+                frmProduct fProduct = new frmProduct();
+                fProduct.Show();
+            }
+            else
+            {
+                MessageBox.Show("You are not allowed!", "WARNING OFF LIMITS", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

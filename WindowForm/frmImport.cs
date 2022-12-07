@@ -156,7 +156,7 @@ namespace Finals_Project
                 if (dt.Rows.Count > 0)
                 {
                     dataGridViewImportDetail.DataSource = dt;
-                    //be used in ReportViewer
+                    //dtProduct will be used in Report Viewer RDLC
                     dtProduct = dt;
                     dtProductTotal = dt.Rows.Count.ToString().Trim();
                 }
@@ -185,6 +185,7 @@ namespace Finals_Project
             else
             {
                 String temp = listBoxImportID.Items[listBoxImportID.SelectedIndex].ToString();
+                //TO DO delete
                 //try
                 //{
                 //    SqlConnection conn = new SqlConnection(Program.strConn);

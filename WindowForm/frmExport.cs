@@ -29,6 +29,19 @@ namespace Finals_Project
             getExportIDList();
 
             //add a visible button for employee but not for acct
+            if(viewProductAuthentication() == false)
+            {
+                btnConfirm.Visible = false;
+            }
+        }
+        public bool viewProductAuthentication()
+        {
+            String temp = sessionAccount;
+            if (temp.Equals("admin") == true || temp.Contains("ACCT") == true)
+            {
+                return true;
+            }
+            return false;
         }
         public void initiateComponents()
         {

@@ -28,31 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblAccountID = new System.Windows.Forms.Label();
-            this.txtbxAccountID = new System.Windows.Forms.TextBox();
-            this.txtbxAccountName = new System.Windows.Forms.TextBox();
-            this.lblAccountName = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.dateTimePickerCurrentTime = new System.Windows.Forms.DateTimePicker();
+            this.lblCurrentTime = new System.Windows.Forms.Label();
+            this.lblDisplay = new System.Windows.Forms.Label();
             this.txtbxAccountEmail = new System.Windows.Forms.TextBox();
             this.lblAccountEmail = new System.Windows.Forms.Label();
             this.txtbxAccountPhone = new System.Windows.Forms.TextBox();
             this.lblAccountPhone = new System.Windows.Forms.Label();
-            this.lblDisplay = new System.Windows.Forms.Label();
+            this.txtbxAccountName = new System.Windows.Forms.TextBox();
+            this.lblAccountName = new System.Windows.Forms.Label();
+            this.txtbxAccountID = new System.Windows.Forms.TextBox();
+            this.lblAccountID = new System.Windows.Forms.Label();
             this.lblWelcome = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lblCurrentTime = new System.Windows.Forms.Label();
-            this.dateTimePickerCurrentTime = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.exportImportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewExportListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createExportListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewImportListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createImportListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewStatisticToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewProductsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -71,44 +75,58 @@
             this.panel1.Controls.Add(this.lblAccountName);
             this.panel1.Controls.Add(this.txtbxAccountID);
             this.panel1.Controls.Add(this.lblAccountID);
-            this.panel1.Location = new System.Drawing.Point(84, 84);
+            this.panel1.Location = new System.Drawing.Point(89, 84);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(617, 163);
+            this.panel1.Size = new System.Drawing.Size(603, 163);
             this.panel1.TabIndex = 0;
             // 
-            // lblAccountID
+            // panel2
             // 
-            this.lblAccountID.AutoSize = true;
-            this.lblAccountID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAccountID.Location = new System.Drawing.Point(31, 35);
-            this.lblAccountID.Name = "lblAccountID";
-            this.lblAccountID.Size = new System.Drawing.Size(75, 13);
-            this.lblAccountID.TabIndex = 0;
-            this.lblAccountID.Text = "Account ID:";
+            this.panel2.BackColor = System.Drawing.Color.GreenYellow;
+            this.panel2.Controls.Add(this.lblTime);
+            this.panel2.Controls.Add(this.dateTimePickerCurrentTime);
+            this.panel2.Controls.Add(this.lblCurrentTime);
+            this.panel2.Location = new System.Drawing.Point(327, 12);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(239, 141);
+            this.panel2.TabIndex = 9;
             // 
-            // txtbxAccountID
+            // lblTime
             // 
-            this.txtbxAccountID.Location = new System.Drawing.Point(135, 35);
-            this.txtbxAccountID.Name = "txtbxAccountID";
-            this.txtbxAccountID.Size = new System.Drawing.Size(152, 20);
-            this.txtbxAccountID.TabIndex = 1;
+            this.lblTime.AutoSize = true;
+            this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.Location = new System.Drawing.Point(25, 79);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(182, 46);
+            this.lblTime.TabIndex = 2;
+            this.lblTime.Text = "20:02:56";
             // 
-            // txtbxAccountName
+            // dateTimePickerCurrentTime
             // 
-            this.txtbxAccountName.Location = new System.Drawing.Point(135, 65);
-            this.txtbxAccountName.Name = "txtbxAccountName";
-            this.txtbxAccountName.Size = new System.Drawing.Size(152, 20);
-            this.txtbxAccountName.TabIndex = 3;
+            this.dateTimePickerCurrentTime.Location = new System.Drawing.Point(18, 53);
+            this.dateTimePickerCurrentTime.Name = "dateTimePickerCurrentTime";
+            this.dateTimePickerCurrentTime.Size = new System.Drawing.Size(199, 20);
+            this.dateTimePickerCurrentTime.TabIndex = 1;
             // 
-            // lblAccountName
+            // lblCurrentTime
             // 
-            this.lblAccountName.AutoSize = true;
-            this.lblAccountName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAccountName.Location = new System.Drawing.Point(31, 65);
-            this.lblAccountName.Name = "lblAccountName";
-            this.lblAccountName.Size = new System.Drawing.Size(94, 13);
-            this.lblAccountName.TabIndex = 2;
-            this.lblAccountName.Text = "Account Name:";
+            this.lblCurrentTime.AutoSize = true;
+            this.lblCurrentTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentTime.Location = new System.Drawing.Point(15, 23);
+            this.lblCurrentTime.Name = "lblCurrentTime";
+            this.lblCurrentTime.Size = new System.Drawing.Size(83, 13);
+            this.lblCurrentTime.TabIndex = 0;
+            this.lblCurrentTime.Text = "Current Time:";
+            // 
+            // lblDisplay
+            // 
+            this.lblDisplay.AutoSize = true;
+            this.lblDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDisplay.Location = new System.Drawing.Point(30, 0);
+            this.lblDisplay.Name = "lblDisplay";
+            this.lblDisplay.Size = new System.Drawing.Size(92, 22);
+            this.lblDisplay.TabIndex = 8;
+            this.lblDisplay.Text = "DISPLAY";
             // 
             // txtbxAccountEmail
             // 
@@ -144,15 +162,39 @@
             this.lblAccountPhone.TabIndex = 4;
             this.lblAccountPhone.Text = "Account Phone:";
             // 
-            // lblDisplay
+            // txtbxAccountName
             // 
-            this.lblDisplay.AutoSize = true;
-            this.lblDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDisplay.Location = new System.Drawing.Point(30, 0);
-            this.lblDisplay.Name = "lblDisplay";
-            this.lblDisplay.Size = new System.Drawing.Size(92, 22);
-            this.lblDisplay.TabIndex = 8;
-            this.lblDisplay.Text = "DISPLAY";
+            this.txtbxAccountName.Location = new System.Drawing.Point(135, 65);
+            this.txtbxAccountName.Name = "txtbxAccountName";
+            this.txtbxAccountName.Size = new System.Drawing.Size(152, 20);
+            this.txtbxAccountName.TabIndex = 3;
+            // 
+            // lblAccountName
+            // 
+            this.lblAccountName.AutoSize = true;
+            this.lblAccountName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAccountName.Location = new System.Drawing.Point(31, 65);
+            this.lblAccountName.Name = "lblAccountName";
+            this.lblAccountName.Size = new System.Drawing.Size(94, 13);
+            this.lblAccountName.TabIndex = 2;
+            this.lblAccountName.Text = "Account Name:";
+            // 
+            // txtbxAccountID
+            // 
+            this.txtbxAccountID.Location = new System.Drawing.Point(135, 35);
+            this.txtbxAccountID.Name = "txtbxAccountID";
+            this.txtbxAccountID.Size = new System.Drawing.Size(152, 20);
+            this.txtbxAccountID.TabIndex = 1;
+            // 
+            // lblAccountID
+            // 
+            this.lblAccountID.AutoSize = true;
+            this.lblAccountID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAccountID.Location = new System.Drawing.Point(31, 35);
+            this.lblAccountID.Name = "lblAccountID";
+            this.lblAccountID.Size = new System.Drawing.Size(75, 13);
+            this.lblAccountID.TabIndex = 0;
+            this.lblAccountID.Text = "Account ID:";
             // 
             // lblWelcome
             // 
@@ -165,38 +207,12 @@
             this.lblWelcome.TabIndex = 9;
             this.lblWelcome.Text = "WELCOME TO DUYPHU SUPPLYMENT SUPPLIER INC.";
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.GreenYellow;
-            this.panel2.Controls.Add(this.dateTimePickerCurrentTime);
-            this.panel2.Controls.Add(this.lblCurrentTime);
-            this.panel2.Location = new System.Drawing.Point(327, 12);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(272, 141);
-            this.panel2.TabIndex = 9;
-            // 
-            // lblCurrentTime
-            // 
-            this.lblCurrentTime.AutoSize = true;
-            this.lblCurrentTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentTime.Location = new System.Drawing.Point(15, 23);
-            this.lblCurrentTime.Name = "lblCurrentTime";
-            this.lblCurrentTime.Size = new System.Drawing.Size(83, 13);
-            this.lblCurrentTime.TabIndex = 0;
-            this.lblCurrentTime.Text = "Current Time:";
-            // 
-            // dateTimePickerCurrentTime
-            // 
-            this.dateTimePickerCurrentTime.Location = new System.Drawing.Point(18, 53);
-            this.dateTimePickerCurrentTime.Name = "dateTimePickerCurrentTime";
-            this.dateTimePickerCurrentTime.Size = new System.Drawing.Size(199, 20);
-            this.dateTimePickerCurrentTime.TabIndex = 1;
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportImportToolStripMenuItem,
             this.viewStatisticToolStripMenuItem,
+            this.viewProductsToolStripMenuItem,
             this.userAccountToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -219,8 +235,22 @@
             this.viewExportListToolStripMenuItem,
             this.createExportListToolStripMenuItem});
             this.exportListToolStripMenuItem.Name = "exportListToolStripMenuItem";
-            this.exportListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportListToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.exportListToolStripMenuItem.Text = "Export List";
+            // 
+            // viewExportListToolStripMenuItem
+            // 
+            this.viewExportListToolStripMenuItem.Name = "viewExportListToolStripMenuItem";
+            this.viewExportListToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.viewExportListToolStripMenuItem.Text = "View Export List";
+            this.viewExportListToolStripMenuItem.Click += new System.EventHandler(this.viewExportListToolStripMenuItem_Click);
+            // 
+            // createExportListToolStripMenuItem
+            // 
+            this.createExportListToolStripMenuItem.Name = "createExportListToolStripMenuItem";
+            this.createExportListToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.createExportListToolStripMenuItem.Text = "Create Export List";
+            this.createExportListToolStripMenuItem.Click += new System.EventHandler(this.createExportListToolStripMenuItem_Click);
             // 
             // importListToolStripMenuItem
             // 
@@ -228,34 +258,20 @@
             this.viewImportListToolStripMenuItem,
             this.createImportListToolStripMenuItem});
             this.importListToolStripMenuItem.Name = "importListToolStripMenuItem";
-            this.importListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importListToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.importListToolStripMenuItem.Text = "Import List";
-            // 
-            // viewExportListToolStripMenuItem
-            // 
-            this.viewExportListToolStripMenuItem.Name = "viewExportListToolStripMenuItem";
-            this.viewExportListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.viewExportListToolStripMenuItem.Text = "View Export List";
-            this.viewExportListToolStripMenuItem.Click += new System.EventHandler(this.viewExportListToolStripMenuItem_Click);
-            // 
-            // createExportListToolStripMenuItem
-            // 
-            this.createExportListToolStripMenuItem.Name = "createExportListToolStripMenuItem";
-            this.createExportListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.createExportListToolStripMenuItem.Text = "Create Export List";
-            this.createExportListToolStripMenuItem.Click += new System.EventHandler(this.createExportListToolStripMenuItem_Click);
             // 
             // viewImportListToolStripMenuItem
             // 
             this.viewImportListToolStripMenuItem.Name = "viewImportListToolStripMenuItem";
-            this.viewImportListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewImportListToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.viewImportListToolStripMenuItem.Text = "View Import List";
             this.viewImportListToolStripMenuItem.Click += new System.EventHandler(this.viewImportListToolStripMenuItem_Click);
             // 
             // createImportListToolStripMenuItem
             // 
             this.createImportListToolStripMenuItem.Name = "createImportListToolStripMenuItem";
-            this.createImportListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createImportListToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.createImportListToolStripMenuItem.Text = "Create Import List";
             this.createImportListToolStripMenuItem.Click += new System.EventHandler(this.createImportListToolStripMenuItem_Click);
             // 
@@ -266,20 +282,35 @@
             this.viewStatisticToolStripMenuItem.Text = "View Statistic";
             this.viewStatisticToolStripMenuItem.Click += new System.EventHandler(this.viewStatisticToolStripMenuItem_Click);
             // 
+            // viewProductsToolStripMenuItem
+            // 
+            this.viewProductsToolStripMenuItem.Name = "viewProductsToolStripMenuItem";
+            this.viewProductsToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
+            this.viewProductsToolStripMenuItem.Text = "View Products";
+            this.viewProductsToolStripMenuItem.Click += new System.EventHandler(this.viewProductsToolStripMenuItem_Click);
+            // 
             // userAccountToolStripMenuItem
             // 
             this.userAccountToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.userAccountToolStripMenuItem.Name = "userAccountToolStripMenuItem";
             this.userAccountToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
-            this.userAccountToolStripMenuItem.Text = "&User Account";
+            this.userAccountToolStripMenuItem.Text = "User Account";
             // 
             // exitToolStripMenuItem
             // 
+            this.exitToolStripMenuItem.BackColor = System.Drawing.Color.Red;
+            this.exitToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.exitToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(95, 22);
             this.exitToolStripMenuItem.Text = "&Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // frmMain
             // 
@@ -290,9 +321,10 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "frmMain";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -332,6 +364,9 @@
         private System.Windows.Forms.ToolStripMenuItem viewStatisticToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem userAccountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem viewProductsToolStripMenuItem;
     }
 }
 

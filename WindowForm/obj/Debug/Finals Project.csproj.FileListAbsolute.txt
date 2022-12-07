@@ -156,3 +156,4 @@ D:\1.TDTU\2.CNPM\Finals Project\WindowForm\obj\Debug\Finals Project.csproj.CoreC
 D:\1.TDTU\2.CNPM\Finals Project\WindowForm\obj\Debug\Finals Project.csproj.CopyComplete
 D:\1.TDTU\2.CNPM\Finals Project\WindowForm\obj\Debug\Finals Project.exe
 D:\1.TDTU\2.CNPM\Finals Project\WindowForm\obj\Debug\Finals Project.pdb
+D:\1.TDTU\2.CNPM\Finals Project\WindowForm\obj\Debug\Finals_Project.frmProduct.resources
