@@ -133,6 +133,7 @@
     <Compile Include="Controllers\ExportsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportDetailsController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -166,6 +167,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LabDBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PaymentMethod.cs">
       <DependentUpon>LabDBModel.tt</DependentUpon>
     </Compile>
@@ -245,6 +247,7 @@
     <Content Include="Views\ExportDetails\Details.cshtml" />
     <Content Include="Views\ExportDetails\Edit.cshtml" />
     <Content Include="Views\ExportDetails\Index.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

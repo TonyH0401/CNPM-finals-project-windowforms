@@ -12,6 +12,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize]
     public class ExportsController : Controller
     {
         private DevConn db = new DevConn();
