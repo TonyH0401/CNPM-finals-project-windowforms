@@ -373,12 +373,10 @@ namespace Finals_Project
 
             SqlConnection conn = new SqlConnection(Program.strConn);
             conn.Open();
-
-            String sSQL = "select importID from Import";
+            String sSQL = "select importID from Import where importCreated = @importCreated";
             SqlCommand cmd = new SqlCommand(sSQL, conn);
-            
+            cmd.Parameters.AddWithValue("@importCreated", DateTime.Now.ToString("yyyy:MM:dd").Replace(":", "-").Trim());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
-
             DataTable dt = new DataTable();
             da.Fill(dt);
             if (dt.Rows.Count > 0)

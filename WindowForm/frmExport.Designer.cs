@@ -295,11 +295,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 434);
-            this.ControlBox = false;
             this.Controls.Add(this.dataGridViewExportDetail);
             this.Controls.Add(this.listBoxExportID);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblExport);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmExport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmExport";
