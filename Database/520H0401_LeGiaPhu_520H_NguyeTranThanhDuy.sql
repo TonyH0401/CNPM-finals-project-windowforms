@@ -17,6 +17,9 @@ insert into Account values ('ACCT1', '123','Nguyễn', 'Toàn', 'nguyenvantoan@g
 insert into Account values ('ACCT2', '123','Nguyễn', 'Hoàng', 'nguyenhuyhoang@gmail.com','444-555-777','123 Nguyễn Khuyến, F.2, Q.2, HN')
 insert into Account values ('STRMNGR1', '123','Hồ', 'Toàn', 'hovantoan@gmail.com','222-222-333','123 Nguyễn Bỉnh Khiêm, F.3, Q.3, TPHCM')
 insert into Account values ('STRMNGR2', '123','Hồ', 'Huy', 'hovanhuy@gmail.com','333-222-333','123 Nguyễn Văn Cừ, F.4, Q.4, Đà Năng')
+insert into Account values ('EMP1', '123','Lê', 'Hoàng', 'levanhoang@gmail.com','333-222-333','123 Nguyễn Văn Cừ, F.4, Q.4, Đà Năng')
+insert into Account values ('EMP2', '123','Lee', 'Jason', 'jasonhlee@gmail.com','333-222-333','123 Nguyễn Văn Cừ, F.4, Q.4, Đà Năng')
+insert into Account values ('EMP3', '123','Hoàng', 'Hiệp', 'hoangnghiahiep@gmail.com','333-222-333','123 Nguyễn Văn Cừ, F.4, Q.4, Đà Năng')
 insert into Account values ('admin', 'admin','admin','admin','admin','admin','TPHCM')
 --select * from Account
 
@@ -34,7 +37,11 @@ insert into Product values ('PROD2','Workout Energy Bar',10,1500,'Germany')
 insert into Product values ('PROD3','Static Energy Drink',20,1000,'Vietnam')
 insert into Product values ('PROD4','Chicken Salad',40,1000,'China')
 insert into Product values ('MNSTR1','MONSTER ENERGY DRINK BASIC',40,1000,'China')
+insert into Product values ('MNSTR2','MONSTER ENERGY DRINK LIME',40,1000,'USA')
+insert into Product values ('PRIME1','PRIME ENERGY DRINK BASIC',10,1000,'UK')
+insert into Product values ('PRIME2','PRIME ENERGY DRINK GRAPE',10,1000,'UK')
 --select * from Product
+--select COUNT(*) from Product
 
 --drop table Store
 create table Store (
@@ -50,6 +57,10 @@ insert into Store values ('ST1', 'CITYGYM L1', '1 Ngo Quyen, F.1, Q.1, TPHCM', 1
 insert into Store values ('ST2', 'YOGA FITNESS', '2 Hoang Hoa Tham, F.1, Q.1, TPHCM', 15)
 insert into Store values ('ST3', 'HOME GYM', '2 Nguyen Hue, F.1, Q.1, TPHCM', 5)
 insert into Store values ('ST4', 'CITYGYM L2', '1 Pasteur, F.1, Q.1, TPHCM', 11)
+insert into Store values ('ST5', 'QUANG LINH STORE', '1 Ngo Quyen, F.1, Q.1, TPHCM', 20)
+insert into Store values ('ST6', 'DIAMOND GYM', '2 Xo Viet Nghe Tinh, F.1, Q.Binh Thanh, TPHCM', 12)
+insert into Store values ('ST7', 'Workout Market', '2 Dinh Bo Linh, F.1, Q.1, TPHCM', 15)
+insert into Store values ('ST8', 'GYMNASIUM STADIUM', '1 Pasteur, F.1, Q.1, TPHCM', 10)
 --select * from Store
 
 --import, bill, export (bill and export hòa làm 1)
