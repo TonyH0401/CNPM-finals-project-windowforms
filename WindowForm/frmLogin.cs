@@ -80,5 +80,33 @@ namespace Finals_Project
                 txtbxPassword.UseSystemPasswordChar = true;
             }
         }
+
+        public bool loadLogin(String accountID, String accountPassword, String strConn)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection(strConn);
+                conn.Open();
+                String sSQL = "select accountID, accountPassword from Account where accountID=@accountID and accountPassword=@accountPassword";
+                SqlCommand cmd = new SqlCommand(sSQL, conn);
+                cmd.Parameters.AddWithValue("@accountID", accountID);
+                cmd.Parameters.AddWithValue("@accountPassword", accountPassword);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

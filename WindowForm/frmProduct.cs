@@ -52,5 +52,31 @@ namespace Finals_Project
         {
             this.frmProduct_Load(null, EventArgs.Empty);
         }
+        //TEST AREA FUNCTION
+        public bool setProductListDataGridViewMethod(String strConn)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection(strConn);
+                conn.Open();
+                String sSQL = "select * from Product";
+                SqlCommand cmd = new SqlCommand(sSQL, conn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

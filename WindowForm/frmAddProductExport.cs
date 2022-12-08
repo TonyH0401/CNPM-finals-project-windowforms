@@ -610,5 +610,71 @@ namespace Finals_Project
                 this.Close();
             }
         }
+        //TESTING AREA FUNCTIONS
+        public String getStoreTaxMethod(String storeID, String strConn) 
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection(strConn);
+                conn.Open();
+                String sSQL = "select taxValue from Store where storeID = @storeID";
+                SqlCommand cmd = new SqlCommand(sSQL, conn);
+                cmd.Parameters.AddWithValue("@storeID", storeID);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    return dt.Rows[0][0].ToString().Trim();
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+        public double calculateTotalCostMethod(double sum, String storeID, String strConn)
+        {
+            double storeTax;
+            String temp = getStoreTaxMethod(storeID, strConn);
+            if(temp.Equals("") == true)
+            {
+                return -1;
+            }
+            else
+            {
+                storeTax = double.Parse(temp);
+            }
+            return sum - (sum * storeTax / 100);
+        }
+        public int getExportBillCounterMethod(String strConn)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection(strConn);
+                conn.Open();
+                String sSQL = "select exportID from Export";
+                SqlCommand cmd = new SqlCommand(sSQL, conn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    return Int32.Parse(dt.Rows.Count.ToString().Trim());
+                }
+                else
+                {
+                    return Int32.Parse(dt.Rows.Count.ToString().Trim());
+                }
+            }
+            catch(Exception ex)
+            {
+                return -1;
+            }
+        }
     }
 }

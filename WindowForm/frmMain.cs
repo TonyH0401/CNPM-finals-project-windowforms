@@ -149,5 +149,14 @@ namespace Finals_Project
                 MessageBox.Show("You are not allowed!", "WARNING OFF LIMITS", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        //TEST AREA FUNCTION
+        public bool viewProductAuthenticationMethod(String temp)
+        {
+            if (temp.Equals("admin") == true || temp.Contains("ACCT") == true)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
