@@ -149,6 +149,23 @@ namespace Finals_Project
                 MessageBox.Show("You are not allowed!", "WARNING OFF LIMITS", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult dt = MessageBox.Show("Do you want to Logout!?", "Exit System Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dt == DialogResult.Yes)
+                {
+                    this.Hide();
+                    this.frmMain_Load(null, EventArgs.Empty);
+                    this.Show();
+                }
+            }
+            catch (ObjectDisposedException ex)
+            {
+                Application.Exit();
+            }
+        }
         //TEST AREA FUNCTION
         public bool viewProductAuthenticationMethod(String temp)
         {
@@ -158,5 +175,6 @@ namespace Finals_Project
             }
             return false;
         }
+
     }
 }
